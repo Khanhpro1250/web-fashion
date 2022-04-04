@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+        integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Form ADD</h2>
+        <form action="" method="post" enctype="multipart/form-data" id="add-form">
+            <div class="form-group">
+                <label for="ProductName">ProductName:</label>
+                <input type="text" class="form-control" id="ProductName" placeholder="Enter text" name="ProductName">
+            </div>
+            <div class="form-group">
+                <label for="ProductId">ProductID:</label>
+                <input type="text" class="form-control" id="ProductId" placeholder="Enter password" name="ProductId">
+            </div>
+
+            <div class="form-group">
+                <label for="TypeProduct">TypeProduct:</label>
+                <input type="text" class="form-control" id="TypeProduct" placeholder="Enter password"
+                    name="TypeProduct">
+            </div>
+            <div class="form-group">
+                <label for="Price">Price:</label>
+                <input type="Price" class="form-control" id="Price" placeholder="Enter text" name="Price">
+            </div>
+            <div class="form-group">
+                <label for="Color">Color:</label>
+                <input type="Color" class="form-control" id="Color" placeholder="Enter text" name="Color">
+            </div>
+            <div class="form-group">
+                <label for="Size">Size:</label>
+                <input type="text" class="form-control" id="Size" placeholder="Enter password" name="Size">
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>:</label>
+                <input type="text" class="form-control" id="Description" placeholder="Enter text" name="Description">
+            </div>
+            <input type="file" name="file" class="cloudinary_fileupload" multiple>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    <script src='https://cdn.rawgit.com/cloudinary/cloudinary_js/master/js/jquery.ui.widget.js'></script>
+    <script src='https://rawgit.com/cloudinary/cloudinary_js/master/js/jquery.iframe-transport.js'></script>
+    <script src='https://rawgit.com/cloudinary/cloudinary_js/master/js/jquery.fileupload.js'></script>
+    <script src='https://rawgit.com/cloudinary/cloudinary_js/master/js/jquery.cloudinary.js'></script>
+    <script>
+        const cloudName = 'khanh15032001';
+        const unsignedUploadPreset = 'act5mvqc';
+        let imgLink;
+        $.cloudinary.config({
+            cloud_name: cloudName
+        })
+
+        $('.cloudinary_fileupload').unsigned_cloudinary_upload(unsignedUploadPreset, {
+                cloud_name: cloudName,
+                tags: 'browser_uploads'
+            }, 
+            {
+                multiple: true
+            }).bind('cloudinarydone', function (e, data) {
+                console.log(`data.loaded: ${data.loaded}, data.total: ${data.total}`)
+            }).bind('fileuploadprogress', function (e, data) {
+                console.log(`fileuploadprogress data.loaded: ${data.loaded},
+                data.total: ${data.total}`);
+            }).bind('cloudinaryprogress', function (e, data) {
+                console.log(`cloudinaryprogress data.loaded: ${data.loaded},
+                data.total: ${data.total}`);
+            }).bind('cloudinarydone', function (e, data) {
+                console.log('Upload result', data.result);
+                imgLink=data.result.secure_url
+            });
+        $("#add-form").submit(e=>{
+            e.preventDefault();
+            let  product= {
+                    productName:$("#ProductName").val(),
+                    productID:$("#ProductId").val(),
+                    typeProduct:$("#TypeProduct").val(),
+                    price:$("#Price").val(),
+                    color:$("#Color").val(),
+                    size:$("#Size").val(),
+                    description:$("#Description").val(),
+                    imgLink:imgLink
+                }
+            $.ajax({
+                type: 'POST',
+                url: 'https://localhost:7244/admin/product/add',
+                data: JSON.stringify(product),
+                cache: false,
+                contentType: "application/json",
+                success: function (res) {
+                    console.log(res)
+                    if(res.code==0){
+                        swal({
+                            title: "SUCCESS",
+                            text:res.message,
+                            icon: "success",
+                            buttons: true,
+                            dangerMode: true
+                        })
+                    }else{
+                        swal({
+                            title: "FAIL",
+                            text: res.message,
+                            icon: "warning",
+                            dangerMode: true,
+                        })
+                    }
+                   
+                }
+            });
+        })
+        
+    </script>
+</body>
+
+
+</html>
