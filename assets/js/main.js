@@ -24,9 +24,9 @@ $("#login_form").submit((e)=>{
 				}).then(()=>{
 					if(res.user.typeUser=="1"){
 						
-						window.location.href="../../admin.html"
+						window.location.href="../admin.html"
 					}else if(res.user.typeUser=="0"){
-						window.location.href="../../index.html"
+						window.location.href="../index.html"
 					}
 				})
 			}else{
