@@ -24,7 +24,7 @@ $("#login_form").submit((e) => {
 				}).then(() => {
 					if (res.user.typeUser == "1") {
 
-						window.location.href = "../admin/admin.html"
+						window.location.href = "./admin/admin.html"
 					} else if (res.user.typeUser == "0") {
 						window.location.href = "../index.html"
 					}
@@ -82,7 +82,7 @@ $("#register_form").submit((e) => {
 })
 //-------------------------------------------------------------------------------------------
 //Index page ------------------------------------------------------------------------------
-if (location.pathname.includes("web-fashion/index.html")||location.pathname.includes("web-fashion/") || location.pathname.includes("index.html")) {
+if (location.pathname.includes("web-fashion/index.html")||location.pathname.includes("web-fashion") || location.pathname.includes("index.html")) {
 	loadProduct("shoes");
 	loadProduct("clothes");
 	loadProduct("jewels");
