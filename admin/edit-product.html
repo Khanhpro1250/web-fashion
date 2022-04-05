@@ -1,242 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Edit Product - Dashboard Admin Template</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:400,700"
-    />
-    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
-         rel = "stylesheet">
-      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="../assets/css/min/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/templatemo-style.css">
-    <!--
-	Product Admin CSS Template
-	https://templatemo.com/tm-524-product-admin
-	-->
-  </head>
 
-  <body>
-    <nav class="navbar navbar-expand-xl">
-      <div class="container h-100">
-        <a class="navbar-brand" href="admin.html">
-          <h1 class="tm-site-title mb-0">Product Admin</h1>
-        </a>
-        <button
-          class="navbar-toggler ml-auto mr-0"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <i class="fas fa-bars tm-nav-icon"></i>
-        </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Edit Product - Dashboard Admin Template</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
+  <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/min/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/templatemo-style.css">
+</head>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto h-100">
-            <li class="nav-item">
-              <a class="nav-link" href="admin.html">
-                <i class="fas fa-tachometer-alt"></i> Dashboard
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="far fa-file-alt"></i>
-                <span> Reports <i class="fas fa-angle-down"></i> </span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Daily Report</a>
-                <a class="dropdown-item" href="#">Weekly Report</a>
-                <a class="dropdown-item" href="#">Yearly Report</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="products.html">
-                <i class="fas fa-shopping-cart"></i> Products
-              </a>
-            </li>
+<body>
+  <nav class="navbar navbar-expand-xl">
+    <div class="container h-100">
+      <a class="navbar-brand" href="admin.html">
+        <h1 class="tm-site-title mb-0">Product Admin</h1>
+      </a>
+      <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
+        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <i class="fas fa-bars tm-nav-icon"></i>
+      </button>
 
-            <li class="nav-item">
-              <a class="nav-link" href="accounts.html">
-                <i class="far fa-user"></i> Accounts
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fas fa-cog"></i>
-                <span> Settings <i class="fas fa-angle-down"></i> </span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Billing</a>
-                <a class="dropdown-item" href="#">Customize</a>
-              </div>
-            </li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link d-block" href="login.html">
-                Admin, <b>Logout</b>
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto h-100">
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html">
+              <i class="fas fa-tachometer-alt"></i> Dashboard
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="far fa-file-alt"></i>
+              <span> Reports <i class="fas fa-angle-down"></i> </span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Daily Report</a>
+              <a class="dropdown-item" href="#">Weekly Report</a>
+              <a class="dropdown-item" href="#">Yearly Report</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="products.html">
+              <i class="fas fa-shopping-cart"></i> Products
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="accounts.html">
+              <i class="far fa-user"></i> Accounts
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-cog"></i>
+              <span> Settings <i class="fas fa-angle-down"></i> </span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" href="#">Billing</a>
+              <a class="dropdown-item" href="#">Customize</a>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link d-block" href="login.html">
+              Admin, <b>Logout</b>
+            </a>
+          </li>
+        </ul>
       </div>
-    </nav>
-    <div class="container tm-mt-big tm-mb-big">
-      <div class="row">
-        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-            <div class="row">
-              <div class="col-12">
-                <h2 class="tm-block-title d-inline-block">Edit Product</h2>
-              </div>
+    </div>
+  </nav>
+  <div class="container tm-mt-big tm-mb-big">
+    <div class="row">
+      <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+          <div class="row">
+            <div class="col-12">
+              <h2 class="tm-block-title d-inline-block">Edit Product</h2>
             </div>
-            <div class="row tm-edit-product-row">
-              <div class="col-xl-6 col-lg-6 col-md-12">
-                <form action="" method="post" class="tm-edit-product-form">
-                  <div class="form-group mb-3">
-                    <label
-                      for="name"
-                      >Product Name
+          </div>
+          <div class="row tm-edit-product-row">
+            <div class="col-xl-6 col-lg-6 col-md-12">
+              <form id="edit-form" action="" class="tm-edit-product-form">
+                <input id="id" name="productName" type="hidden" class="form-control" />
+                <div class="form-group mb-3">
+                  <label for="productName">Product Name
+                  </label>
+                  <input id="productName" name="productName" type="text" class="form-control validate" required />
+                </div>
+                <div class="row">
+                  <div class="form-group mb-3 col-xs-12 col-sm-6">
+                    <label for="productId">Product ID
                     </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      value="Lorem Ipsum Product"
-                      class="form-control validate"
-                    />
+                    <input id="productId" name="productId" type="text" class="form-control validate"
+                      data-large-mode="true" />
                   </div>
-                  <div class="form-group mb-3">
-                    <label
-                      for="description"
-                      >Description</label
-                    >
-                    <textarea                    
-                      class="form-control validate tm-small"
-                      rows="5"
-                      required
-                    >Lorem ipsum dolor amet gentrify glossier locavore messenger bag chillwave hashtag irony migas wolf kale chips small batch kogi direct trade shaman.</textarea>
+                  <div class="form-group mb-3 col-xs-12 col-sm-6">
+                    <label for="amount">Amount
+                    </label>
+                    <input id="amount" name="amount" type="text" class="form-control validate" required />
                   </div>
-                  <div class="form-group mb-3">
-                    <label
-                      for="category"
-                      >Category</label
-                    >
-                    <select
-                      class="custom-select tm-select-accounts"
-                      id="category"
-                    >
-                      <option>Select category</option>
-                      <option value="1" selected>New Arrival</option>
-                      <option value="2">Most Popular</option>
-                      <option value="3">Trending</option>
-                    </select>
-                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="description">Description</label>
+                  <textarea id="description" class="form-control validate" rows="3" required></textarea>
+                </div>
+                <div class="form-group mb-3">
                   <div class="row">
-                      <div class="form-group mb-3 col-xs-12 col-sm-6">
-                          <label
-                            for="expire_date"
-                            >Expire Date
-                          </label>
-                          <input
-                            id="expire_date"
-                            name="expire_date"
-                            type="text"
-                            value="22 Oct, 2020"
-                            class="form-control validate"
-                            data-large-mode="true"
-                          />
-                        </div>
-                        <div class="form-group mb-3 col-xs-12 col-sm-6">
-                          <label
-                            for="stock"
-                            >Units In Stock
-                          </label>
-                          <input
-                            id="stock"
-                            name="stock"
-                            type="text"
-                            value="19,765"
-                            class="form-control validate"
-                          />
-                        </div>
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label for="typeProduct">Product Categories</label>
+                      <select class="custom-select tm-select-accounts" id="typeProduct" name="typeProduct">
+                        <option selected>Categories</option>
+                        <option value="shoes">Shoes</option>
+                        <option value="clothes">Clothes</option>
+                        <option value="jewels">Jewels</option>
+                      </select>
+                    </div>
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label for="size">Size
+                      </label>
+                      <input id="size" name="size" type="text" class="form-control validate" data-large-mode="true" />
+                    </div>
                   </div>
-                  
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                <div class="tm-product-img-edit mx-auto">
-                  <img src="img/product-image.jpg" alt="Product image" class="img-fluid d-block mx-auto">
-                  <i
-                    class="fas fa-cloud-upload-alt tm-upload-icon"
-                    onclick="document.getElementById('fileInput').click();"
-                  ></i>
                 </div>
-                <div class="custom-file mt-3 mb-3">
-                  <input id="fileInput" type="file" style="display:none;" />
-                  <input
-                    type="button"
-                    class="btn btn-primary btn-block mx-auto"
-                    value="CHANGE IMAGE NOW"
-                    onclick="document.getElementById('fileInput').click();"
-                  />
+                <div class="row">
+                  <div class="form-group mb-3 col-xs-12 col-sm-6">
+                    <label for="price">Price
+                    </label>
+                    <input id="price" name="price" type="text" class="form-control validate" data-large-mode="true" />
+                  </div>
+                  <div class="form-group mb-3 col-xs-12 col-sm-6">
+                    <label for="discount">Discount
+                    </label>
+                    <input id="discount" name="discount" type="text" class="form-control validate" required />
+                  </div>
+
                 </div>
-              </div>
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block text-uppercase">Update Now</button>
-              </div>
-            </form>
             </div>
+            <div id="upload-review" class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+              <div class="upload_review-list">
+                <div class="tm-product-img-dummy mx-auto">
+                  <i class="fas fa-cloud-upload-alt tm-upload-icon"
+                    onclick="document.getElementById('fileInput').click();"></i>
+                </div>
+              </div>
+              <div class="custom-file mt-3 mb-3">
+                <input id="fileInput" type="file" style="display:none;" name="file" class="cloudinary_fileupload" />
+                <input type="button" class="btn btn-primary btn-block mx-auto text-uppercase"
+                  value="UPLOAD PRODUCT IMAGE" onclick="document.getElementById('fileInput').click();" />
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block text-uppercase">Update Product Now</button>
+            </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-    <footer class="tm-footer row tm-mt-small">
-      <div class="col-12 font-weight-light">
-          <p class="text-center text-white mb-0 px-4 small">
-              Design by &copy; <a href="https://www.facebook.com/khanhshiperlover/"><strong>Khanh Huynh</strong></a>
-          </p>
-      </div>
+  </div>
+  <footer class="tm-footer row tm-mt-small">
+    <div class="col-12 font-weight-light">
+      <p class="text-center text-white mb-0 px-4 small">
+        Design by &copy; <a href="https://www.facebook.com/khanhshiperlover/"><strong>Khanh Huynh</strong></a>
+      </p>
+    </div>
   </footer>
 
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <!-- https://jquery.com/download/ -->
-    <script src="jquery-ui-datepicker/jquery-ui.min.js"></script>
-    <!-- https://jqueryui.com/download/ -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- https://getbootstrap.com/ -->
-    <script>
-      $(function() {
-        $("#expire_date").datepicker({
-          defaultDate: "10/22/2020"
-        });
+  <script src="../assets/js/min/jquery-3.3.1.min.js"></script>
+  <script src="../assets/js/min/bootstrap.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+  <script src='https://cdn.rawgit.com/cloudinary/cloudinary_js/master/js/jquery.ui.widget.js'></script>
+  <script src='https://rawgit.com/cloudinary/cloudinary_js/master/js/jquery.iframe-transport.js'></script>
+  <script src='https://rawgit.com/cloudinary/cloudinary_js/master/js/jquery.fileupload.js'></script>
+  <script src='https://rawgit.com/cloudinary/cloudinary_js/master/js/jquery.cloudinary.js'></script>
+
+  <script>
+    const cloudName = 'khanh15032001';
+    const unsignedUploadPreset = 'act5mvqc';
+
+    let imgLink;
+    $.cloudinary.config({
+      cloud_name: cloudName
+    })
+
+    $('.cloudinary_fileupload').unsigned_cloudinary_upload(unsignedUploadPreset, {
+      cloud_name: cloudName,
+      tags: 'browser_uploads'
+    },
+      {
+        multiple: true
+      }).bind('cloudinarydone', function (e, data) {
+        console.log(`data.loaded: ${data.loaded}, data.total: ${data.total}`)
+      }).bind('fileuploadprogress', function (e, data) {
+        console.log(`fileuploadprogress data.loaded: ${data.loaded},
+              data.total: ${data.total}`);
+      }).bind('cloudinaryprogress', function (e, data) {
+        console.log(`cloudinaryprogress data.loaded: ${data.loaded},
+              data.total: ${data.total}`);
+      }).bind('cloudinarydone', function (e, data) {
+        console.log('Upload result', data.result);
+        imgLink = data.result.secure_url
+        let html =
+          `
+        <div style="height: auto" class="tm-product-img-dummy mx-auto">
+          <img id="imgLink" src="${imgLink}" alt=""/>
+        </div>
+        <br>
+        `
+        $('.upload_review-list').html('');
+        $('.upload_review-list').prepend(html)
       });
-    </script>
-  </body>
+    $("#edit-form").submit(e => {
+      e.preventDefault();
+      let typeProduct = $("#typeProduct option:selected").val();
+      if (imgLink == null) {
+        imgLink = document.getElementById('imgLink').getAttribute('src');
+      }
+
+      let product = {
+        productName: $("#productName").val(),
+        productId: $("#productId").val(),
+        typeProduct: typeProduct,
+        price: $("#price").val(),
+        amount: $("#amount").val(),
+        discount: $("#discount").val(),
+        size: $("#size").val(),
+        description: $("#description").val(),
+        imgLink: imgLink
+      }
+      console.log(product)
+      $.ajax({
+        type: 'PUT',
+        url: 'https://localhost:7244/admin/product/update?productId=' + getIdDetails().id,
+        data: JSON.stringify(product),
+        cache: false,
+        contentType: "application/json",
+        success: function (res) {
+          console.log(res)
+          if (res.code == 0) {
+            swal({
+              title: "SUCCESS",
+              text: res.message,
+              icon: "success",
+              buttons: true,
+              dangerMode: true
+            }).then(() => {
+              window.location.href = "products.html"
+            })
+          } else {
+            swal({
+              title: "FAIL",
+              text: res.message,
+              icon: "warning",
+              dangerMode: true,
+            })
+          }
+
+        }
+      });
+    })
+  </script>
+</body>
+
 </html>

@@ -1,8 +1,8 @@
-
+//USER
 //Login page -------------------------------------------------------------------
-$("#login_form").submit((e)=>{
+$("#login_form").submit((e) => {
 	e.preventDefault();
-	let user= {
+	let user = {
 		username: $("#username").val(),
 		password: $("#password").val(),
 	}
@@ -11,25 +11,25 @@ $("#login_form").submit((e)=>{
 		url: "https://localhost:7244/account/login",
 		data: JSON.stringify(user),
 		dataType: "json",
-  		contentType: "application/json",
+		contentType: "application/json",
 		success: function (res) {
 			console.log(res)
-			if(res.code==0){
+			if (res.code == 0) {
 				swal({
 					title: "SUCCESS",
 					text: "Login Successfully",
 					icon: "success",
 					buttons: true,
 					dangerMode: true,
-				}).then(()=>{
-					if(res.user.typeUser=="1"){
-						
-						window.location.href="../admin.html"
-					}else if(res.user.typeUser=="0"){
-						window.location.href="../index.html"
+				}).then(() => {
+					if (res.user.typeUser == "1") {
+
+						window.location.href = "../admin.html"
+					} else if (res.user.typeUser == "0") {
+						window.location.href = "../index.html"
 					}
 				})
-			}else{
+			} else {
 				swal({
 					title: "FAIL",
 					text: res.message,
@@ -42,9 +42,9 @@ $("#login_form").submit((e)=>{
 })
 
 //register page -------------------------------------------------------------------------------------- 
-$("#register_form").submit((e)=>{
+$("#register_form").submit((e) => {
 	e.preventDefault();
-	let user_register= {
+	let user_register = {
 		name: $("#name").val(),
 		phoneNumber: $("#phonenumber").val(),
 		username: $("#username").val(),
@@ -56,20 +56,20 @@ $("#register_form").submit((e)=>{
 		type: "POST",
 		url: "https://localhost:7244/account/register",
 		data: JSON.stringify(user_register),
-  		contentType: "application/json",
+		contentType: "application/json",
 		success: function (res) {
 			console.log(res)
-			if(res.code==0){
+			if (res.code == 0) {
 				swal({
 					title: "SUCCESS",
 					text: "Login Successfully",
 					icon: "success",
 					buttons: true,
 					dangerMode: true,
-				}).then(()=>{
-					window.location.href="./login.html"
+				}).then(() => {
+					window.location.href = "./login.html"
 				})
-			}else{
+			} else {
 				swal({
 					title: "FAIL",
 					text: res.message,
@@ -82,7 +82,7 @@ $("#register_form").submit((e)=>{
 })
 //-------------------------------------------------------------------------------------------
 //Index page ------------------------------------------------------------------------------
-if(location.pathname.includes("web-fashion/index.html")||location.pathname.includes("index.html") ){
+if (location.pathname.includes("web-fashion/index.html") || location.pathname.includes("index.html")) {
 	loadProduct("shoes");
 	loadProduct("clothes");
 	loadProduct("jewels");
@@ -91,22 +91,22 @@ function loadProduct(typeProduct) {
 	$.ajax({
 		type: 'GET',
 		url: 'https://localhost:7244/product/search/',
-		data: { key:typeProduct },
+		data: { key: typeProduct },
 		cache: false,
 		success: function (res) {
-			if(res.code==0){
+			if (res.code == 0) {
 				console.log(res)
-				ShowProduct(res.products,typeProduct)
+				ShowProduct(res.products, typeProduct)
 			}
-			
+
 		}
 	});
 }
 //show shoe product
-function ShowProduct(products,typeProduct){
-	if(products){
-		products.forEach((product)=>{
-			let html =`
+function ShowProduct(products, typeProduct) {
+	if (products) {
+		products.forEach((product) => {
+			let html = `
 			<div class="col l-2-4 m-4 s-m-mt-16">
 				<div class="container__products">
 				<a href="./product/detailProduct.html?id=${product.id}">
@@ -129,12 +129,12 @@ function ShowProduct(products,typeProduct){
 				</div>
 			</div>
 			`;
-			if(typeProduct=="shoes"){
+			if (typeProduct == "shoes") {
 				$("#product_shoe").append(html);
-			}else if(typeProduct=="clothes"){
+			} else if (typeProduct == "clothes") {
 				$("#product_clothes").append(html);
 			}
-			
+
 		})
 	}
 	// <div class="container__product-banner"></div> //main img
@@ -145,21 +145,21 @@ function ShowProduct(products,typeProduct){
 }
 //----------------------------------------------------------------------------------------------------------
 ///detail product page---------------------------------------------------------------------------------
-if(location.pathname.includes("detailProduct")){
+if (location.pathname.includes("detailProduct")) {
 	loadDetailProduct()
 }
-function getIdDetails(){
+function getIdDetails() {
 	var urlParams;
 	(window.onpopstate = function () {
 		var match,
-			pl     = /\+/g,  // Regex for replacing addition symbol with a space
+			pl = /\+/g,  // Regex for replacing addition symbol with a space
 			search = /([^&=]+)=?([^&]*)/g,
 			decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-			query  = window.location.search.substring(1);
-	
+			query = window.location.search.substring(1);
+
 		urlParams = {};
 		while (match = search.exec(query))
-		urlParams[decode(match[1])] = decode(match[2]);
+			urlParams[decode(match[1])] = decode(match[2]);
 	})();
 	return urlParams
 }
@@ -168,10 +168,10 @@ function loadDetailProduct() {
 	$.ajax({
 		type: 'GET',
 		url: 'https://localhost:7244/product/search/',
-		data: { key:id },
+		data: { key: id },
 		cache: false,
 		success: function (res) {
-			if(res.code==0){
+			if (res.code == 0) {
 				showDetailProduct(res.products[0])
 				getSameProduct(res.products[0].typeProduct)
 			}
@@ -179,8 +179,8 @@ function loadDetailProduct() {
 	});
 }
 function showDetailProduct(productDetails) {
-	if(productDetails){
-		let html=`
+	if (productDetails) {
+		let html = `
 			<div class="collection__content">
 				<div class="col l-6 m-12 c-12">
 					<div class="collection__item main-effect">
@@ -221,28 +221,28 @@ function showDetailProduct(productDetails) {
 			</div> 
 		`
 		$('#detail_product').append(html)
-		
+
 	}
 }
 function getSameProduct(key) {
 	$.ajax({
 		type: 'GET',
 		url: 'https://localhost:7244/product/search/',
-		data: { key:key },
+		data: { key: key },
 		cache: false,
 		success: function (res) {
 			console.log(res)
-			if(res.code==0){
+			if (res.code == 0) {
 				showSameProduct(res.products)
 			}
 		}
 	});
 }
 function showSameProduct(products) {
-	let html =``;
-	if(products){
+	let html = ``;
+	if (products) {
 		products.forEach(function (product) {
-			html+=`
+			html += `
 			<div class="row no-gutters">
 				<div class="collection__suggestions-container">
 					<div class="col l-5 m-6">
@@ -262,10 +262,113 @@ function showSameProduct(products) {
 			
 			`;
 		})
-		
+
 	}
 	$("#same-product").append(html);
-	
+
 }
 
 //----------------------------------------------------------------------------------------
+
+
+//ADMIN
+if (location.pathname.includes("products.html")) {
+	getAllProductsAdmin()
+}
+function getAllProductsAdmin() {
+	$.ajax({
+		type: 'GET',
+		url: 'https://localhost:7244/product/getall',
+		cache: false,
+		success: function (res) {
+			console.log(res)
+			if (res.code == 0) {
+				showListProductAdmin(res.products)
+			}
+		}
+	});
+}
+function showListProductAdmin(products) {
+	products.forEach(function (product) {
+		let html = `
+			<tr id="row_${product.id}">
+			<th scope="row">
+			<input type="checkbox" />
+			</th>
+			<td class="tm-product-name"><a href="edit-product.html?id=${product.id}">${product.productName}</a></td>
+			<td>1,450</td>
+			<td>${product.amount}</td>
+			<td>${product.price}</td>
+			<td>
+			<a href="#" onclick=" deleteProductAdmin('${product.id}')" class="tm-product-delete-link">
+				<i class="far fa-trash-alt tm-product-delete-icon"></i>
+			</a>
+			</td>
+		</tr>
+		`
+		$("#list-product").append(html)
+	})
+}
+function deleteProductAdmin(productID) {
+	var key = productID.toString();
+	swal({
+		title: "DELETE",
+		text: "Login Successfully",
+		icon: "error",
+		buttons: true,
+		dangerMode: true,
+	}).then((result) => {
+		if (result) {
+			$.ajax({
+				type: 'DELETE',
+				url: 'https://localhost:7244/admin/product/delete?key=' + key,
+				cache: false,
+				contentType: "text/plain",
+				success: function (res) {
+					if (res.code == 0) {
+						swal({
+							title: "Success !",
+							text: res.message,
+							icon: "success",
+							buttons: true,
+							dangerMode: true,
+						}).then(() => {
+							location.reload();
+						})
+					}
+				}
+			});
+		}
+	})
+}
+if (location.pathname.includes("edit-product.html")) {
+	let id = getIdDetails().id;
+	showDetailEditProduct(id);
+}
+function showDetailEditProduct(productID) {
+	$.ajax({
+		type: 'GET',
+		url: 'https://localhost:7244/product/search?key=' + productID,
+		cache: false,
+		success: function (res) {
+			$("#id").val(productID),
+			$("#productName").val(res.products[0].productName),
+			$("#productId").val(res.products[0].productId),
+			$("#price").val(res.products[0].price),
+			$("#amount").val(res.products[0].amount),
+			$("#discount").val(res.products[0].discount),
+			$("#size").val(res.products[0].size),
+			$("#description").val(res.products[0].description)
+			$('select[name="typeProduct"]').find(`option[value=${res.products[0].typeProduct}]`).attr("selected",true);
+			let html =
+				`
+				<div style="height: auto" class="tm-product-img-dummy mx-auto">
+				<img id="imgLink" src="${res.products[0].imgLink}" alt=""/>
+				</div>
+				<br>
+				`
+			$('.upload_review-list').html('');
+			$('.upload_review-list').prepend(html)
+		}
+	})
+}
