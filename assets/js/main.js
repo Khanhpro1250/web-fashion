@@ -133,6 +133,8 @@ function ShowProduct(products, typeProduct) {
 				$("#product_shoe").append(html);
 			} else if (typeProduct == "clothes") {
 				$("#product_clothes").append(html);
+			}else if(typeProduct == "jewels"){
+				$("#product_jewels").append(html);
 			}
 
 		})
@@ -180,23 +182,21 @@ function loadDetailProduct() {
 }
 function showDetailProduct(productDetails) {
 	if (productDetails) {
-		let html = `
+		let detail = `
 			<div class="collection__content">
 				<div class="col l-6 m-12 c-12">
 					<div class="collection__item main-effect">
-						<img src="../../assets/img/img-size-l/bg_only_item.png" alt="">
+						<img src="${productDetails.imgLink}" alt="">
 					</div>
 				</div>
 				<div class="col l-6 m-12 c-12">
 					<div class="collection__item-info">
 						<a href="#" class="collection__item-shoes-name">${productDetails.productName}</a>
 						<p class="collection__item-desc">
-						Ví dụ mua bán nhà trị giá 1 tỉ lại khai 300 triệu, rồi cơ quan thuế phải liên tục sửa khung giá đất cho sát với thị trường và áp vào để tính thuế? Như vậy, cứ tạo ra vòng luẩn quẩn, khai thấp - né thuế, cập nhật khung giá đất - ấn định thuế...
-
-						Cũng có hướng xử lý là khi nhận hồ sơ có dấu hiệu trốn thuế, cơ quan thuế mạnh dạn làm đúng quy định pháp luật: đủ mức xử lý hình sự thì chuyển sang cơ quan điều tra; hồ sơ có dấu hiệu vi phạm sẽ thanh tra để có căn cứ xử phạt. 
 							
 						</p>
-						<h3 class="collection__item--price-sale">${productDetails.price}₫</h3>
+						
+						<h3 class="collection__item--price-sale">${productDetails.price}₫ </h3>
 						<span class="collection__item--main-price">${productDetails.price}</span>₫</span>
 						<span class="collection__item--border-bottom"></span>
 						<ul class="collection__promotions-list">
@@ -210,17 +210,26 @@ function showDetailProduct(productDetails) {
 								<i class="collection__promotions-item-icon fas fa-check"></i>Tặng 1 áo thun <span class="collection__promotions-item--service">thời trang 190k</span>
 							</li>
 							<li class="collection__promotions-item">
-								<i class="collection__promotions-item-icon fas fa-check"></i>Giao ngay <span class="collection__promotions-item--service">2H tại Hà Nội</span>
+								<i class="collection__promotions-item-icon fas fa-check"></i>Giao ngay <span class="collection__promotions-item--service">2H tại TP Hồ Chí Minh</span>
 							</li>
 							<li class="collection__promotions-item">
 								<i class="collection__promotions-item-icon fas fa-check"></i>Không lấy quà vui lòng liên hệ</li>
 						</ul>
 					</div>
-					<button class="btn-add" > Thêm vào giỏ hàng</button>
+					<button class="btn-add" > Thêm vào giỏ hàng</button> 
 				</div>
 			</div> 
+			
 		`
-		$('#detail_product').append(html)
+		let detail_product=`
+
+			<p class="collection__item-detail-desc">
+				${productDetails.description}
+				<h4 class="collection__item--size-sale"> Size : ${productDetails.size} &nbsp; &nbsp; &nbsp; Discount : ${productDetails.discount} %</h4>
+			</p>
+		`
+		$("#description_product").append(detail_product)
+		$('#detail_product').append(detail)
 
 	}
 }
@@ -247,7 +256,7 @@ function showSameProduct(products) {
 				<div class="collection__suggestions-container">
 					<div class="col l-5 m-6">
 						<div class="collection-shoes main-effect">
-							<img src="../assets/img/shoes/collection/1.jpg" alt="">
+							<img src="${product.imgLink}" alt="">
 						</div>
 					</div>
 					<div class="col l-7 m-6">

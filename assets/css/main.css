@@ -434,7 +434,7 @@
 
 .collection__item-shoes-name {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     font-size: 2.5rem;
     font-weight: 700;
@@ -445,12 +445,20 @@
 }
 
 .collection__item-desc {
-    height: 140px;
+    height: 100px;
     font-size: 1.6rem;
     line-height: 1.5;
     margin-top: 15px;
     overflow: auto ;
 }
+.collection__item-detail-desc{
+    height: 400;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-top: 15px;
+    overflow: auto ;
+}
+
 ::-webkit-scrollbar {
     width: 2px;
 }
@@ -464,6 +472,11 @@ background: #d6d6d6;
 .collection__item--price-sale {
     font-size: 2.5rem;
     color: var(--red-color);
+    margin-top: 8px;
+}
+.collection__item--size-sale {
+    font-size: 2.0rem;
+    color: var( --primary-color);
     margin-top: 8px;
 }
 
@@ -482,8 +495,8 @@ background: #d6d6d6;
 .collection__promotions-list {
     list-style: none;
     font-size: 1.3rem;
-    height: 130px;
-    overflow: scroll;
+    height: 200px;
+    overflow: auto;
 }
 
 .collection__promotions-item--gift {

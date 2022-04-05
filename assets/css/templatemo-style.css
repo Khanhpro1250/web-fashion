@@ -498,7 +498,7 @@ input[type="checkbox"]:focus {
   border-radius: 0;
 }
 .tm-product-img-dummy {
-  
+  margin-top: 35px;
   max-width: 100%;
   display: flex;
   height: 300px;
@@ -508,7 +508,8 @@ input[type="checkbox"]:focus {
   background: #aaa;
 }
 .upload_review-list{
-  height: 485px;
+  
+  height: 605px;
   overflow: auto;
 }
 .tm-product-img-dummy img{

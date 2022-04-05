@@ -472,7 +472,7 @@ html {
     transform:scale(1.01)
 }
 .container__product-img {
-    
+    height: 240px;
 }
 
 .container__banner {
@@ -488,7 +488,7 @@ html {
 }
 
 .container__banner-img {
-
+    height: 240px;
 }
 
 .container__desc {
@@ -515,6 +515,7 @@ html {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .container__product-name:hover {
