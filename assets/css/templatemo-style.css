@@ -423,7 +423,7 @@ input[type="checkbox"] {
   transition: all 0.1s linear;
 }
 input[type="checkbox"]:checked {
-  background: url(../img/check-mark.png) #394e64 center no-repeat;
+  background: url(../img/icon-img/check-mark.png) #394e64 center no-repeat;
 }
 input[type="checkbox"]:focus {
   outline: 0 none;
