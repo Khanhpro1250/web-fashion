@@ -81,9 +81,11 @@ $("#register_form").submit((e)=>{
 	})
 })
 //-------------------------------------------------------------------------------------------
-//Product page ------------------------------------------------------------------------------
-if(location.pathname.includes("index")){
-	loadProduct("shoe");
+//Index page ------------------------------------------------------------------------------
+if(location.pathname.includes("web-fashion/index.html")||location.pathname.includes("index.html") ){
+	loadProduct("shoes");
+	loadProduct("clothes");
+	loadProduct("jewels");
 }
 function loadProduct(typeProduct) {
 	$.ajax({
@@ -93,6 +95,7 @@ function loadProduct(typeProduct) {
 		cache: false,
 		success: function (res) {
 			if(res.code==0){
+				console.log(res)
 				ShowProduct(res.products,typeProduct)
 			}
 			
@@ -116,18 +119,17 @@ function ShowProduct(products,typeProduct){
 					</a>
 					<div class="container__desc">
 						<div class="container__product-ultra">
-							<a href="./product/detailProduct.html?id=${product.id}" class="container__product-name">${product.productName} - ${product.color}</a>
+							<a href="./product/detailProduct.html?id=${product.id}" class="container__product-name">${product.productName}</a>
 						</div>
 						<span class="container__product--price-sale">5.000.000₫</span>
 						<span class="container__product--main-price">${product.price}₫</span>
 					</div>
 					<div class="container__product--hot">Hot</div>
-					
-					<div class="container__product--percent">23%</div>
+					<div class="container__product--percent">${product.discount}%</div>
 				</div>
 			</div>
 			`;
-			if(typeProduct=="shoe"){
+			if(typeProduct=="shoes"){
 				$("#product_shoe").append(html);
 			}else if(typeProduct=="clothes"){
 				$("#product_clothes").append(html);
