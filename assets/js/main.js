@@ -13,7 +13,6 @@ $("#login_form").submit((e) => {
 		dataType: "json",
 		contentType: "application/json",
 		success: function (res) {
-			console.log(res)
 			if (res.code == 0) {
 				swal({
 					title: "SUCCESS",
@@ -58,7 +57,6 @@ $("#register_form").submit((e) => {
 		data: JSON.stringify(user_register),
 		contentType: "application/json",
 		success: function (res) {
-			console.log(res)
 			if (res.code == 0) {
 				swal({
 					title: "SUCCESS",
@@ -95,7 +93,7 @@ function loadProduct(typeProduct) {
 		cache: false,
 		success: function (res) {
 			if (res.code == 0) {
-				console.log(res)
+				
 				ShowProduct(res.products, typeProduct)
 			}
 
@@ -240,7 +238,7 @@ function getSameProduct(key) {
 		data: { key: key },
 		cache: false,
 		success: function (res) {
-			console.log(res)
+			
 			if (res.code == 0) {
 				showSameProduct(res.products)
 			}
@@ -290,7 +288,7 @@ function getAllProductsAdmin() {
 		url: 'https://localhost:7244/product/getall',
 		cache: false,
 		success: function (res) {
-			console.log(res)
+		
 			if (res.code == 0) {
 				showListProductAdmin(res.products)
 			}
@@ -381,3 +379,132 @@ function showDetailEditProduct(productID) {
 		}
 	})
 }
+
+function getTypeAccount(val){
+	var type =val.value;
+	$.ajax({
+		type: 'GET',
+		url: 'https://localhost:7244/admin/account/search?key=' + type,
+		cache: false,
+		success: function (res) {
+			showListAccountAdmin(res.users)
+		}
+	})
+}
+function showListAccountAdmin(accounts) {
+	$("#list-user").html('')
+	let html;
+	accounts.forEach(function (account) {
+		html = `
+			<tr onclick="showDetailAccount('${account.id}')">
+			<th scope="row">
+			
+			</th>
+			<td class="tm-product-name">${account.name}</td>
+			<td>${account.email}</td>
+		</tr>
+		`
+		
+		$("#list-user").append(html)
+	})
+}
+function showDetailAccount(id){
+	$.ajax({
+		type: 'GET',
+		url: 'https://localhost:7244/admin/account/search?key=' + id.toString(),
+		cache: false,
+		success: function (res) {
+			let account=res.users[0];
+			let typeUser = $("#typeProduct option:selected").val();
+			$("#name").val(account.name)
+			$("#email").val(account.email)
+			$("#username").val(account.username)
+			$("#phoneNumber").val(account.phoneNumber)
+			$('select[name="typeUser"]').find(`option[value=${account.typeUser}]`).attr("selected",true);
+			$("#deleteAccount").attr('idUser',`${account.id}`)
+			$("#update-account").attr('idUser',`${account.id}`)
+		}
+	})
+}
+$("#deleteAccount").click(e=>{
+	let id = $(e.target).attr('idUser')
+	swal({
+		title: "Delete account !",
+		text: "Delete Account ?",
+		icon: "error",
+		buttons: true,
+		dangerMode: true,
+	}).then((result) => {
+		if(result){
+			$.ajax({
+				type: 'DELETE',
+				url: 'https://localhost:7244/admin/account/delete?key=' + id.toString(),
+				cache: false,
+				success: function (res) {
+					if(res.code == 0){
+						swal({
+							title: "Success!",
+							text: res.message,
+							icon: "success",
+							buttons: true,
+							dangerMode: true,
+						}).then(()=>{
+							location.reload();
+						})
+					}
+					else{
+						swal({
+							title: "FAIL!",
+							text: res.message,
+							icon: "error",
+							buttons: true,
+							dangerMode: true,
+						}).then(()=>{
+							location.reload();
+						})
+					}
+				}
+			})
+		}
+	})
+	
+})
+$("#update-account").submit((e) => {
+	let id=$("#update-account").attr('idUser')
+	e.preventDefault();
+	let typeUser = $("#typeUser option:selected").val();
+	let user_update = {
+		name: $("#name").val(),
+		phoneNumber: $("#phoneNumber").val(),
+		username:$("#username").val(),
+		email: $("#email").val(),
+		typeUser:typeUser
+		
+	}
+	$.ajax({
+		type: "PUT",
+		url: "https://localhost:7244/admin/account/update?UserId="+id,
+		data: JSON.stringify(user_update),
+		contentType: "application/json",
+		success: function (res) {
+			if (res.code == 0) {
+				swal({
+					title: "SUCCESS",
+					text: "Login Successfully",
+					icon: "success",
+					buttons: true,
+					dangerMode: true,
+				}).then(() => {
+					location.reload();
+				})
+			} else {
+				swal({
+					title: "FAIL",
+					text: res.message,
+					icon: "warning",
+					dangerMode: true,
+				})
+			}
+		}
+	})
+})
