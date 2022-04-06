@@ -191,7 +191,7 @@ function showDetailProduct(productDetails) {
 					<div class="collection__item-info">
 						<a href="#" class="collection__item-shoes-name">${productDetails.productName}</a>
 						<p class="collection__item-desc">
-							
+							${productDetails.subtitle}
 						</p>
 						
 						<h3 class="collection__item--price-sale">${productDetails.price}₫ </h3>
@@ -299,9 +299,7 @@ function showListProductAdmin(products) {
 	products.forEach(function (product) {
 		let html = `
 			<tr id="row_${product.id}">
-			<th scope="row">
-			<input type="checkbox" />
-			</th>
+			
 			<td class="tm-product-name"><a href="edit-product.html?id=${product.id}">${product.productName}</a></td>
 			<td>1,450</td>
 			<td>${product.amount}</td>
@@ -366,6 +364,7 @@ function showDetailEditProduct(productID) {
 			$("#discount").val(res.products[0].discount),
 			$("#size").val(res.products[0].size),
 			$("#description").val(res.products[0].description)
+			$("#subtitle").val(res.products[0].subtitle)
 			$('select[name="typeProduct"]').find(`option[value=${res.products[0].typeProduct}]`).attr("selected",true);
 			let html =
 				`

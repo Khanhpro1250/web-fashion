@@ -430,12 +430,14 @@ input[type="checkbox"]:focus {
   min-height: 650px;
 }
 .tm-product-table-container {
+
   max-height: 500px;
-  width: 110%;
+
   margin-bottom: 15px;
   overflow:auto;
 }
 .tm-product-table tr {
+  
   font-weight: 600;
 }
 .tm-product-name {
