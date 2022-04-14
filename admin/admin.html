@@ -25,8 +25,9 @@
                 <a class="navbar-brand" href="admin.html">
                     <h1 class="tm-site-title mb-0">Product Admin</h1>
                 </a>
-                <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <i class="fas fa-bars tm-nav-icon"></i>
                 </button>
 
@@ -41,8 +42,8 @@
                         </li>
                         <li class="nav-item dropdown">
 
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="far fa-file-alt"></i>
                                 <span>
                                     Reports <i class="fas fa-angle-down"></i>
@@ -68,8 +69,8 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-cog"></i>
                                 <span>
                                     Settings <i class="fas fa-angle-down"></i>
@@ -118,7 +119,7 @@
                         <h2 class="tm-block-title">Storage Information</h2>
                         <div id="pieChartContainer">
                             <canvas id="pieChart" class="chartjs-render-monitor" width="200" height="200"></canvas>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
@@ -126,14 +127,15 @@
                         <h2 class="tm-block-title">Notification List</h2>
                         <div class="tm-notification-items">
                             <div class="media tm-notification-item">
-                                <div class="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar Image" class="rounded-circle"></div>
+                                <div class="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar Image"
+                                        class="rounded-circle"></div>
                                 <div class="media-body">
                                     <p class="mb-2"><b>Jessica</b> and <b>6 others</b> sent you new <a href="#"
                                             class="tm-notification-link">product updates</a>. Check new orders.</p>
                                     <span class="tm-small tm-text-color-secondary">6h ago.</span>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -189,7 +191,7 @@
                                     <td>12:00, 22 NOV 2018</td>
                                     <td>06:00, 28 NOV 2018</td>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -199,46 +201,43 @@
         <footer class="tm-footer row tm-mt-small">
             <div class="col-12 font-weight-light">
                 <p class="text-center text-white mb-0 px-4 small">
-                    Design by &copy; <a href="https://www.facebook.com/khanhshiperlover/"><strong>Khanh Huynh</strong></a>
+                    Design by &copy; <a href="https://www.facebook.com/khanhshiperlover/"><strong>Khanh
+                            Huynh</strong></a>
                 </p>
             </div>
         </footer>
     </div>
-
-    <script src="../assets/js/min/jquery-3.3.1.min.js"></script>
-    <!-- https://jquery.com/download/ -->
-    <script src="../assets/js/min/moment.min.js"></script>
-    <!-- https://momentjs.com/ -->
-    <script src="../assets/js/min/Chart.min.js"></script>
-    <!-- http://www.chartjs.org/docs/latest/ -->
-    <script src="../assets/js/min/bootstrap.min.js"></script>
-    <!-- https://getbootstrap.com/ -->
-    <script src="../assets/js/tooplate-scripts.js"></script>
-    <script>
-        Chart.defaults.global.defaultFontColor = 'white';
-        let ctxLine,
-            ctxBar,
-            ctxPie,
-            optionsLine,
-            optionsBar,
-            optionsPie,
-            configLine,
-            configBar,
-            configPie,
-            lineChart;
-        barChart, pieChart;
-        // DOM is ready
-        $(function () {
-            drawLineChart(); // Line Chart
-            drawBarChart(); // Bar Chart
-            drawPieChart(); // Pie Chart
-
-            $(window).resize(function () {
-                updateLineChart();
-                updateBarChart();                
-            });
-        })
-    </script>
+    
 </body>
+<script src="../assets/js/min/jquery-3.3.1.min.js"></script>
+<script src="../assets/js/min/moment.min.js"></script>
+<script src="../assets/js/min/Chart.min.js"></script>
+<script src="../assets/js/min/bootstrap.min.js"></script>
+<script src="../assets/js/tooplate-scripts.js"></script>
+<script>
+    Chart.defaults.global.defaultFontColor = 'white';
+    let ctxLine,
+        ctxBar,
+        ctxPie,
+        optionsLine,
+        optionsBar,
+        optionsPie,
+        configLine,
+        configBar,
+        configPie,
+        lineChart;
+    barChart, pieChart;
+    // DOM is ready
+    $(function () {
+        drawLineChart(); // Line Chart
+        drawBarChart(); // Bar Chart
+        drawPieChart(); // Pie Chart
+
+        $(window).resize(function () {
+            updateLineChart();
+            updateBarChart();
+        });
+    })
+</script>
 
 </html>

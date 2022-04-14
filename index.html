@@ -53,7 +53,7 @@
                         
                         </label>
                         
-                        <a class="" href="cartProduct.html">
+                        <a class="" href="./product/cartProduct.html">
                             <img class="nav__purchase-img s-hidden" src="./assets/img/icon-img/cart.png" alt="">
                         </a>
                     </div>
@@ -101,19 +101,17 @@
 
                     <ul class="navbar__category">
                         <li class="navbar__category-item">
-                            <a class="navbar__category-link navbar__category-link--color-primary" href="#">Trang chủ</a>
+                            <a class="navbar__category-link navbar__category-link--color-primary" href="index.html">Trang chủ</a>
+                        </li>
+                       
+                        <li class="navbar__category-item">
+                            <a class="navbar__category-link" href="#product_list-all">Sản phẩm</a>
                         </li>
                         <li class="navbar__category-item">
-                            <a class="navbar__category-link" href="#">Giới thiệu</a>
+                            <a class="navbar__category-link" href="#news">Tin tức</a>
                         </li>
                         <li class="navbar__category-item">
-                            <a class="navbar__category-link" href="#">Sản phẩm</a>
-                        </li>
-                        <li class="navbar__category-item">
-                            <a class="navbar__category-link" href="#">Tin tức</a>
-                        </li>
-                        <li class="navbar__category-item">
-                            <a class="navbar__category-link" href="#">Liên hệ</a>
+                            <a class="navbar__category-link" href="#contact">Liên hệ</a>
                         </li>
                     </ul>
 
@@ -300,11 +298,11 @@
             </div>
 
             <!--Shoe-->
-            <div class="prominent">
+            <div id="product_list-all" class="prominent">
                 <div class="grid wide">
                     <div class="title-section">
                         <a class="title-section-link" href="#">
-                            <h2 class="heading-section main-effect">Thời trang giày</h2>
+                            <h2 id="shoes" class="heading-section main-effect">Thời trang giày</h2>
                         </a>
                     </div>
 
@@ -318,8 +316,8 @@
             <div class="prominent">
                 <div class="grid wide">
                     <div class="title-section">
-                        <a class="title-section-link" href="#">
-                            <h2 class="heading-section main-effect">Bộ sưu tập quần áo</h2>
+                        <a class="title-section-link" href="">
+                            <h2 id="clothes" class="heading-section main-effect">Bộ sưu tập quần áo</h2>
                         </a>
                     </div>
 
@@ -332,7 +330,7 @@
                 <div class="grid wide">
                     <div class="title-section">
                         <a class="title-section-link" href="#">
-                            <h2 class="heading-section main-effect">Bộ sưu tập phụ kiện</h2>
+                            <h2 id="jewels" class="heading-section main-effect">Bộ sưu tập phụ kiện</h2>
                         </a>
                     </div>
 
@@ -556,7 +554,7 @@
                 </div>
             </div>
 
-            <div class="evaluate">
+            <!-- <div class="evaluate">
                 <div class="evaluate__title">
                     <h2 class="evaluate__heading">Đánh giá khách hàng</h2>
                 </div>
@@ -625,14 +623,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- news -->
             <div class="news">
                 <div class="grid wide">
                     <div class="title-section">
                         <a class="title-section-link" href="#">
-                            <h2 class="heading-section main-effect">Tin tức</h2>
+                            <h2 id="news" class="heading-section main-effect">Tin tức</h2>
                         </a>
                     </div>
                     <div class="row">
@@ -763,7 +761,7 @@
                 </div>
             </div>
 
-            <div class="footer__information">
+            <div id="contact" class="footer__information">
                 <div class="grid wide">
                     <div class="row">
                         <div class="col l-2-4 m-6 c-12">
@@ -870,6 +868,9 @@
             <img src="./assets/img/icon-img/to-top-arrow2.png" alt="">
         </a>
     </div>
+    <div id="loading">
+        <img src="./assets/img/loading.svg" />
+      </div>
 </body>
 <script src="./assets/js/main.js"></script>
 </html>`

@@ -181,8 +181,11 @@
       </p>
     </div>
   </footer>
+ 
 
-  <script src="../assets/js/min/jquery-3.3.1.min.js"></script>
+</body>
+
+<script src="../assets/js/min/jquery-3.3.1.min.js"></script>
   <script src="../assets/js/min/bootstrap.min.js"></script>
   <script src="../assets/js/main.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -192,94 +195,91 @@
   <script src='https://rawgit.com/cloudinary/cloudinary_js/master/js/jquery.iframe-transport.js'></script>
   <script src='https://rawgit.com/cloudinary/cloudinary_js/master/js/jquery.fileupload.js'></script>
   <script src='https://rawgit.com/cloudinary/cloudinary_js/master/js/jquery.cloudinary.js'></script>
+<script>
+  const cloudName = 'khanh15032001';
+  const unsignedUploadPreset = 'act5mvqc';
+  let imgLink;
+  $.cloudinary.config({
+    cloud_name: cloudName
+  })
 
-  <script>
-    const cloudName = 'khanh15032001';
-    const unsignedUploadPreset = 'act5mvqc';
-
-    let imgLink;
-    $.cloudinary.config({
-      cloud_name: cloudName
-    })
-
-    $('.cloudinary_fileupload').unsigned_cloudinary_upload(unsignedUploadPreset, {
-      cloud_name: cloudName,
-      tags: 'browser_uploads'
-    },
-      {
-        multiple: true
-      }).bind('cloudinarydone', function (e, data) {
-        console.log(`data.loaded: ${data.loaded}, data.total: ${data.total}`)
-      }).bind('fileuploadprogress', function (e, data) {
-        console.log(`fileuploadprogress data.loaded: ${data.loaded},
-              data.total: ${data.total}`);
-      }).bind('cloudinaryprogress', function (e, data) {
-        console.log(`cloudinaryprogress data.loaded: ${data.loaded},
-              data.total: ${data.total}`);
-      }).bind('cloudinarydone', function (e, data) {
-        console.log('Upload result', data.result);
-        imgLink = data.result.secure_url
-        let html =
-          `
-        <div style="height: auto" class="tm-product-img-dummy mx-auto">
-          <img id="imgLink" src="${imgLink}" alt=""/>
-        </div>
-        <br>
+  $('.cloudinary_fileupload').unsigned_cloudinary_upload(unsignedUploadPreset, {
+    cloud_name: cloudName,
+    tags: 'browser_uploads'
+  },
+    {
+      multiple: true
+    }).bind('cloudinarydone', function (e, data) {
+      console.log(`data.loaded: ${data.loaded}, data.total: ${data.total}`)
+    }).bind('fileuploadprogress', function (e, data) {
+      console.log(`fileuploadprogress data.loaded: ${data.loaded},
+            data.total: ${data.total}`);
+    }).bind('cloudinaryprogress', function (e, data) {
+      console.log(`cloudinaryprogress data.loaded: ${data.loaded},
+            data.total: ${data.total}`);
+    }).bind('cloudinarydone', function (e, data) {
+      console.log('Upload result', data.result);
+      imgLink = data.result.secure_url
+      let html =
         `
-        $('.upload_review-list').html('');
-        $('.upload_review-list').prepend(html)
-      });
-    $("#edit-form").submit(e => {
-      e.preventDefault();
-      let typeProduct = $("#typeProduct option:selected").val();
-      if (imgLink == null) {
-        imgLink = document.getElementById('imgLink').getAttribute('src');
-      }
+      <div style="height: auto" class="tm-product-img-dummy mx-auto">
+        <img id="imgLink" src="${imgLink}" alt=""/>
+      </div>
+      <br>
+      `
+      $('.upload_review-list').html('');
+      $('.upload_review-list').prepend(html)
+    });
+  $("#edit-form").submit(e => {
+    e.preventDefault();
+    let typeProduct = $("#typeProduct option:selected").val();
+    if (imgLink == null) {
+      imgLink = document.getElementById('imgLink').getAttribute('src');
+    }
 
-      let product = {
-        productName: $("#productName").val(),
-        productId: $("#productId").val(),
-        typeProduct: typeProduct,
-        price: $("#price").val(),
-        amount: $("#amount").val(),
-        discount: $("#discount").val(),
-        size: $("#size").val(),
-        description: $("#description").val(),
-        subtitle: $("#subtitle").val(),
-        imgLink: imgLink
-      }
-      console.log(product)
-      $.ajax({
-        type: 'PUT',
-        url: 'https://localhost:7244/admin/product/update?productId=' + getIdDetails().id,
-        data: JSON.stringify(product),
-        cache: false,
-        contentType: "application/json",
-        success: function (res) {
-          console.log(res)
-          if (res.code == 0) {
-            swal({
-              title: "SUCCESS",
-              text: res.message,
-              icon: "success",
-              buttons: true,
-              dangerMode: true
-            }).then(() => {
-              window.location.href = "products.html"
-            })
-          } else {
-            swal({
-              title: "FAIL",
-              text: res.message,
-              icon: "warning",
-              dangerMode: true,
-            })
-          }
-
+    let product = {
+      productName: $("#productName").val(),
+      productId: $("#productId").val(),
+      typeProduct: typeProduct,
+      price: $("#price").val(),
+      amount: $("#amount").val(),
+      discount: $("#discount").val(),
+      size: $("#size").val(),
+      description: $("#description").val(),
+      subtitle: $("#subtitle").val(),
+      imgLink: imgLink
+    }
+    console.log(product)
+    $.ajax({
+      type: 'PUT',
+      url: 'https://localhost:7244/admin/product/update?productId=' + getIdDetails().id,
+      data: JSON.stringify(product),
+      cache: false,
+      contentType: "application/json",
+      success: function (res) {
+        console.log(res)
+        if (res.code == 0) {
+          swal({
+            title: "SUCCESS",
+            text: res.message,
+            icon: "success",
+            buttons: true,
+            dangerMode: true
+          }).then(() => {
+            window.location.href = "products.html"
+          })
+        } else {
+          swal({
+            title: "FAIL",
+            text: res.message,
+            icon: "warning",
+            dangerMode: true,
+          })
         }
-      });
-    })
-  </script>
-</body>
+
+      }
+    });
+  })
+</script>
 
 </html>

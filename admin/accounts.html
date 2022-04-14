@@ -1,237 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Accounts - Product Admin Template</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:400,700"
-    />
-    <link rel="stylesheet" href="jquery-ui-datepicker/jquery-ui.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    
-    <link rel="stylesheet" href="../assets/css/min/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/templatemo-style.css">
-  </head>
 
-  <body id="reportsPage">
-    <div class="" id="home">
-      <nav class="navbar navbar-expand-xl">
-        <div class="container h-100">
-          <a class="navbar-brand" href="admin.html">
-            <h1 class="tm-site-title mb-0">Product Admin</h1>
-          </a>
-          <button
-            class="navbar-toggler ml-auto mr-0"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i class="fas fa-bars tm-nav-icon"></i>
-          </button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Accounts - Product Admin Template</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
+  <link rel="stylesheet" href="jquery-ui-datepicker/jquery-ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto h-100">
-              <li class="nav-item">
-                <a class="nav-link" href="admin.html">
-                  <i class="fas fa-tachometer-alt"></i> Dashboard
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="far fa-file-alt"></i>
-                  <span> Reports <i class="fas fa-angle-down"></i> </span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Daily Report</a>
-                  <a class="dropdown-item" href="#">Weekly Report</a>
-                  <a class="dropdown-item" href="#">Yearly Report</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="products.html">
-                  <i class="fas fa-shopping-cart"></i> Products
-                </a>
-              </li>
+  <link rel="stylesheet" href="../assets/css/min/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/templatemo-style.css">
+</head>
 
-              <li class="nav-item">
-                <a class="nav-link active" href="accounts.html">
-                  <i class="far fa-user"></i> Accounts
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-cog"></i>
-                  <span> Settings <i class="fas fa-angle-down"></i> </span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Profile</a>
-                  <a class="dropdown-item" href="#">Billing</a>
-                  <a class="dropdown-item" href="#">Customize</a>
-                </div>
-              </li>
-            </ul>
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link d-block" href="login.html">
-                  Admin, <b>Logout</b>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <div class="container mt-5">
-        <div class="row tm-content-row">
-          <div class="col-12 tm-block-col">
-            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-              <h2 class="tm-block-title">List of Accounts</h2>
-              <p class="text-white">Accounts</p>
-              <select onchange="getTypeAccount(this)" id="selected-accounts" class="custom-select">
-                <option value="-1">Select account</option>
-                <option value="1">Admin</option>
-                <option value="0">Customer</option>
-              </select>
-            </div>
-          </div>
-          
-        </div>
-        
-        <!-- row -->
-        <div class="row tm-content-row">
-          <div class="tm-block-col tm-col-avatar">
-            <div class="tm-bg-primary-dark tm-block tm-block-avatar">
-              <h2 class="tm-block-title">Account setting</h2>
-              <div class="tm-avatar-container">
-                <form id="update-account" action="" class="tm-signup-form row">
-                  <div class="form-group col-lg-12">
-                    <label for="name">Account Name</label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      class="form-control validate"
-                    />
-                  </div>
-                  <div class="form-group col-lg-12">
-                    <label for="email">Account Email</label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="text"
-                      class="form-control validate"
-                    />
-                  </div>
-                  <div class="form-group col-lg-12">
-                    <label for="username">Username</label>
-                    <input
-                      id="username"
-                      name="username"
-                      type="text"
-                      class="form-control validate"
-                    />
-                  </div>
-                  <div class="form-group col-lg-12">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      type="text"
-                      class="form-control validate"
-                    />
-                  </div>
-                  <div class="form-group col-lg-12">
-                    <label for="typeProduct">Account Permision</label>
-                      <select class="custom-select tm-select-accounts" id="typeUser" name="typeUser">
-                        <option selected>Permision</option>
-                        <option value="0">Customer</option>
-                        <option value="1">Admin</option>
-                      </select>
-                  </div>
-                  <div class="form-group col-lg-12">
-                    <label class="tm-hide-sm">&nbsp;</label>
-                    <button
-                      id="update-account"
-                      type="submit"
-                      class="btn btn-primary btn-block text-uppercase"
-                    >
-                      Update Your Profile
-                    </button>
-                  </div>
-                  <div class="col-12">
-                    <button
-                    type="button"
-                      id="deleteAccount"
-                      class="btn btn-primary btn-block text-uppercase"
-                    >
-                      Delete Your Account
-                  </button>
-                  </div>
-                </form>
+<body id="reportsPage">
+  <div class="" id="home">
+    <nav class="navbar navbar-expand-xl">
+      <div class="container h-100">
+        <a class="navbar-brand" href="admin.html">
+          <h1 class="tm-site-title mb-0">Product Admin</h1>
+        </a>
+        <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-bars tm-nav-icon"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto h-100">
+            <li class="nav-item">
+              <a class="nav-link" href="admin.html">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="far fa-file-alt"></i>
+                <span> Reports <i class="fas fa-angle-down"></i> </span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Daily Report</a>
+                <a class="dropdown-item" href="#">Weekly Report</a>
+                <a class="dropdown-item" href="#">Yearly Report</a>
               </div>
-            </div>
-          </div>
-          <div class="tm-block-col tm-col-account-settings">
-            <div class="tm-bg-primary-dark tm-block tm-block-settings">
-              <h2 class="tm-block-title">Account Settings</h2>
-              <div class="tm-bg-primary-dark tm-block tm-block-products">
-                <div class="tm-product-table-container">
-                  <table  class="table  table-hover tm-table-small tm-product-table ">
-                    <thead>
-                      <tr>
-                        <th scope="col">&nbsp;</th>
-                        <th scope="col">FULL NAME</th>
-                        <th scope="col">EMAIL</th>
-                      </tr>
-                    </thead>
-                    <tbody id="list-user">
-                      
-                    </tbody>
-                  </table>
-                </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="products.html">
+                <i class="fas fa-shopping-cart"></i> Products
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" href="accounts.html">
+                <i class="far fa-user"></i> Accounts
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i>
+                <span> Settings <i class="fas fa-angle-down"></i> </span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="#">Billing</a>
+                <a class="dropdown-item" href="#">Customize</a>
               </div>
-            </div>
-            
-          </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link d-block" href="login.html">
+                Admin, <b>Logout</b>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
-      <footer class="tm-footer row tm-mt-small">
-        <div class="col-12 font-weight-light">
-            <p class="text-center text-white mb-0 px-4 small">
-                Design by &copy; <a href="https://www.facebook.com/khanhshiperlover/"><strong>Khanh Huynh</strong></a>
-            </p>
+    </nav>
+    <div class="container mt-5">
+      <div class="row tm-content-row">
+        <div class="col-12 tm-block-col">
+          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <h2 class="tm-block-title">List of Accounts</h2>
+            <p class="text-white">Accounts</p>
+            <select onchange="getTypeAccount(this)" id="selected-accounts" class="custom-select">
+              <option value="-1">Select account</option>
+              <option value="1">Admin</option>
+              <option value="0">Customer</option>
+            </select>
+          </div>
         </div>
-    </footer>
-    </div>
 
-    <script src="../assets/js/min/bootstrap.min.js"></script>
-    <script src="../assets/js/min/jquery-3.3.1.min.js"></script>
-    <script src="../assets/js/main.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  </body>
+      </div>
+
+      <!-- row -->
+      <div class="row tm-content-row">
+        <div class="tm-block-col tm-col-avatar">
+          <div class="tm-bg-primary-dark tm-block tm-block-avatar">
+            <h2 class="tm-block-title">Account setting</h2>
+            <div class="tm-avatar-container">
+              <form id="update-account" action="" class="tm-signup-form row">
+                <div class="form-group col-lg-12">
+                  <label for="name">Account Name</label>
+                  <input id="name" name="name" type="text" class="form-control validate" />
+                </div>
+                <div class="form-group col-lg-12">
+                  <label for="email">Account Email</label>
+                  <input id="email" name="email" type="text" class="form-control validate" />
+                </div>
+                <div class="form-group col-lg-12">
+                  <label for="username">Username</label>
+                  <input id="username" name="username" type="text" class="form-control validate" />
+                </div>
+                <div class="form-group col-lg-12">
+                  <label for="phoneNumber">Phone Number</label>
+                  <input id="phoneNumber" name="phoneNumber" type="text" class="form-control validate" />
+                </div>
+                <div class="form-group col-lg-12">
+                  <label for="typeProduct">Account Permision</label>
+                  <select class="custom-select tm-select-accounts" id="typeUser" name="typeUser">
+                    <option selected>Permision</option>
+                    <option value="0">Customer</option>
+                    <option value="1">Admin</option>
+                  </select>
+                </div>
+                <div class="form-group col-lg-12">
+                  <label class="tm-hide-sm">&nbsp;</label>
+                  <button id="update-account" type="submit" class="btn btn-primary btn-block text-uppercase">
+                    Update Your Profile
+                  </button>
+                </div>
+                <div class="col-12">
+                  <button type="button" id="deleteAccount" class="btn btn-primary btn-block text-uppercase">
+                    Delete Your Account
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="tm-block-col tm-col-account-settings">
+          <div class="tm-bg-primary-dark tm-block tm-block-settings">
+            <h2 class="tm-block-title">Account Settings</h2>
+            <div class="tm-bg-primary-dark tm-block tm-block-products">
+              <div class="tm-product-table-container">
+                <table class="table  table-hover tm-table-small tm-product-table ">
+                  <thead>
+                    <tr>
+                      <th scope="col">&nbsp;</th>
+                      <th scope="col">FULL NAME</th>
+                      <th scope="col">EMAIL</th>
+                    </tr>
+                  </thead>
+                  <tbody id="list-user">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <footer class="tm-footer row tm-mt-small">
+      <div class="col-12 font-weight-light">
+        <p class="text-center text-white mb-0 px-4 small">
+          Design by &copy; <a href="https://www.facebook.com/khanhshiperlover/"><strong>Khanh Huynh</strong></a>
+        </p>
+      </div>
+    </footer>
+  </div>
+  
+</body>
+<script src="../assets/js/min/bootstrap.min.js"></script>
+<script src="../assets/js/min/jquery-3.3.1.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </html>
