@@ -1,7 +1,19 @@
-//USER
-//Login page -------------------------------------------------------------------\
-// Put following code on the top of head element:
 window.onload = function () {
+	let account={
+		name:localStorage.getItem('name_user'),
+		phone:localStorage.getItem('phone_user'),
+		typeUser:localStorage.getItem('type_user'),
+		address:localStorage.getItem('address_user'),
+
+	}
+
+	if(account!=null) {
+		$('#name-login').html(account.name);
+		$('#name-login1').html(account.name);
+		$("#address-delivery").html(account.address);
+		$("#phone-delivery").html(account.phone);
+		$("#name-delivery").html(account.name);
+	}
 	//index
 	if (
 		location.pathname.includes("web-fashion/index.html") ||
@@ -27,7 +39,12 @@ window.onload = function () {
 	if (location.pathname.includes("cartProduct.html")) {
 		getCartProduct();
 	}
+	
 };
+
+//USER
+//Login page -------------------------------------------------------------------\
+
 $("#login_form").submit((e) => {
 	e.preventDefault();
 	let user = {
@@ -50,8 +67,12 @@ $("#login_form").submit((e) => {
 					dangerMode: true,
 				}).then(() => {
 					localStorage.setItem("userId", res.userId);
+					localStorage.setItem("name_user", res.user.name);
+					localStorage.setItem("phone_user", res.user.phoneNumber);
+					localStorage.setItem("type_user", res.user.typeUser);
+					localStorage.setItem('address_user',res.user.address)
 					if (res.typeUser == "1") {
-						window.location.href = "./admin/admin.html";
+						window.location.href = "../admin/admin.html";
 					} else if (res.typeUser == "0") {
 						window.location.href = "../index.html";
 					}
@@ -74,6 +95,7 @@ $("#register_form").submit((e) => {
 	let user_register = {
 		name: $("#name").val(),
 		phoneNumber: $("#phonenumber").val(),
+		address: $("#address").val(),
 		username: $("#username").val(),
 		password: $("#password").val(),
 		confirmPassword: $("#confirmPassword").val(),
@@ -522,6 +544,7 @@ function showDetailAccount(id) {
 			$("#email").val(account.email);
 			$("#username").val(account.username);
 			$("#phoneNumber").val(account.phoneNumber);
+			$("#address").val(account.address);
 			$('select[name="typeUser"]')
 				.find(`option[value=${account.typeUser}]`)
 				.attr("selected", true);
@@ -578,6 +601,7 @@ $("#update-account").submit((e) => {
 	let user_update = {
 		name: $("#name").val(),
 		phoneNumber: $("#phoneNumber").val(),
+		address:$("#address").val(),
 		username: $("#username").val(),
 		email: $("#email").val(),
 		typeUser: typeUser,
