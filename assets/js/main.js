@@ -33,20 +33,90 @@ window.onload = function () {
   if (location.pathname.includes("detailProduct")) {
     loadDetailProduct();
   }
+  if (location.pathname.includes("login")) {
+    if(account!=null) {
+      history.reload();
+    }
+  }
+  if (location.pathname.includes("register")) {
+    if(account!=null) {
+      history.reload();
+    }
+  }
   //ADMIN
   if (location.pathname.includes("products.html")) {
-    getAllProductsAdmin();
+    if(account!=null){
+      if(account.typeUser==1){
+        getAllProductsAdmin();
+      }else{
+        swal({
+          title: "FAIL",
+          text: "Bạn không có quyền truy cập !",
+          icon: "warning",
+          dangerMode: true,
+        }).then(() => {
+          history.back()
+        })
+       
+      }
+    }else{
+      swal({
+        title: "FAIL",
+        text: "Bạn không có quyền truy cập !",
+        icon: "warning",
+        dangerMode: true,
+      }).then(() => {
+        history.back()
+      })
+    }
   }
   if (location.pathname.includes("edit-product.html")) {
-    let id = getIdDetails().id;
-    showDetailEditProduct(id);
+    if(account!=null){
+      if(account.typeUser==1){
+        let id = getIdDetails().id;
+        showDetailEditProduct(id);
+      }else{
+        swal({
+          title: "FAIL",
+          text: "Bạn không có quyền truy cập !",
+          icon: "warning",
+          dangerMode: true,
+        }).then(() => {
+          history.back()
+        })
+       
+      }
+    }else{
+      swal({
+        title: "FAIL",
+        text: "Bạn không có quyền truy cập !",
+        icon: "warning",
+        dangerMode: true,
+      }).then(() => {
+        history.back()
+      })
+    }
+    
   }
   if (location.pathname.includes("cartProduct.html")) {
-    getCartProduct();
+    if(account==null){
+      history.back();
+    }else{
+      getCartProduct();
+    }
+  }
+  if (location.pathname.includes("Order.html")) {
+    if(account!=null){
+      getOrder();
+    }else{
+      getCartProduct();
+    }
+    
   }
   $("#logout-icon").click(() => {
     localStorage.clear();
     location.reload();
+    window.location.href="../account/login.html"
   });
 };
 
@@ -693,7 +763,6 @@ function showListCartProduct(cartProducts) {
     let html = `
 		<div class="cartProduct_item">
 			<div class="cartProduct_item-img">
-				
 				<div class="product-img container__product-banner main-effect">
 					<a href="#"><img
 							class="container__product-img "
@@ -876,7 +945,7 @@ function caculatePrice(productCarts) {
                 cache: false,
                 success: function (res) {
                   if (res.code == 0) {
-                    location.reload();
+                      window.location.href = "./Order.html"
                   }
                 },
               });
@@ -893,4 +962,100 @@ function caculatePrice(productCarts) {
       });
     }
   });
+}
+function getOrder() {
+  let userId = localStorage.getItem("userId")
+  if(userId==null) {
+    let html = `
+      <div class="cartProduct-noitem">
+          <div>
+              <div class="no_item-cart-product">
+              <span>Không có đơn hàng nào!</span> 
+              </div>
+          </div>
+      </div>`
+      $("#list-order").append(html)
+  }else{
+    $.ajax({
+      type: "GET",
+      url: "https://localhost:7244/product/getorder?userId=" + userId,
+      catch: false,
+      success: function (res) {
+        if(res.code==0 && res.count>0){
+          $("#list-order").html('')
+          showLisrOrder(res.listOrder)
+        }else if(res.count==0){
+          $("#list-order").html('')
+          let html = `
+          <div class="cartProduct-noitem">
+              <div>
+                  <div class="no_item-cart-product">
+                  <span>Không có đơn hàng nào!</span> 
+                  </div>
+              </div>
+          </div>`
+          $("#list-order").append(html)
+        }
+        
+      },
+    });
+  }
+  
+}
+function showLisrOrder(listOrders) {
+  
+  listOrders.forEach((listOrder,i) => {
+    let productCarts=listOrder.productCart;
+    let html = `
+      <div class="order_heading-container">
+          <label>
+              <span id="select-all_cart-product">Đặt hàng thành công</span>
+          </label>
+
+          <span></span>
+      </div>
+      <div id="list-product-order-${i}" class="col l-12 order-list">
+          
+          <div class="order_footer-container">
+              <label>
+              </label>
+              <span><strong>Tổng cộng: &ensp;</strong><span id="total_price-order-${i}">2.000.000</span></span>
+          </div>
+      </div>
+    `
+    $("#list-order").append(html)
+    let summaryPrice=0;
+    productCarts.forEach(productCart => {
+      summaryPrice+=listOrder.totalPrice;
+      let product=productCart.product;
+      let html1=`
+      
+          <div id="order_detais" class="order_detais">
+            <div class="order_item-img">
+                <div class="order_item container__product-banner main-effect">
+                    <a id="img-item" href="#"><img
+                            class="container__product-img "
+                            src="${product.imgLink}"
+                            alt=""></a>
+                </div>
+                <div class="product-name">
+                    <a href="#">
+                        <h3 id="product-item-name">${product.productName}</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="order-price">
+                <span><strong>Số lượng: &ensp;</strong><span id="amount-product-item">${productCart.amount}</span></span>
+            </div>
+            <div class="order-price">
+                <span class="price-product-item">${changTextPrice(listOrder.totalPrice)}₫</span>
+            </div>
+          </div>
+      `
+      $(`#list-product-order-${i}`).prepend(html1)
+    })
+
+    
+    $(`#total_price-order-${i}`).html(changTextPrice(summaryPrice))
+  })
 }
