@@ -33,14 +33,30 @@ window.onload = function () {
   if (location.pathname.includes("detailProduct")) {
     loadDetailProduct();
   }
-  if (location.pathname.includes("login")) {
+  if (location.pathname.includes("login.html")) {
     if(account!=null) {
-      history.reload();
+      if(account.typeUser==1||account.typeUser==0){
+        swal({
+          title: "FAIL",
+          text: "Bạn đã đăng nhập !",
+          icon: "warning",
+          dangerMode: true,
+        }).then(() => {
+          history.back()
+        })
+      }
     }
   }
   if (location.pathname.includes("register")) {
     if(account!=null) {
-      history.reload();
+      swal({
+        title: "FAIL",
+        text: "Bạn đã đăng nhập !",
+        icon: "warning",
+        dangerMode: true,
+      }).then(() => {
+        history.back()
+      })
     }
   }
   //ADMIN
@@ -109,15 +125,18 @@ window.onload = function () {
     if(account!=null){
       getOrder();
     }else{
-      getCartProduct();
+      history.back();
     }
     
   }
   $("#logout-icon").click(() => {
     localStorage.clear();
-    location.reload();
     window.location.href="../account/login.html"
   });
+  $("#logout-admin").click(() => {
+    localStorage.clear();
+    window.location.href="../account/login.html"
+  })
 };
 
 //USER
@@ -937,6 +956,7 @@ function caculatePrice(productCarts) {
               buttons: true,
               dangerMode: true,
             }).then(() => {
+              $("#list_cartProduct-item").html('')
               $.ajax({
                 type: "DELETE",
                 url:
@@ -945,6 +965,7 @@ function caculatePrice(productCarts) {
                 cache: false,
                 success: function (res) {
                   if (res.code == 0) {
+                    
                       window.location.href = "./Order.html"
                   }
                 },
@@ -983,9 +1004,19 @@ function getOrder() {
       success: function (res) {
         if(res.code==0 && res.count>0){
           $("#list-order").html('')
-          showLisrOrder(res.listOrder)
+          showListOrder(res.listOrder)
         }else if(res.count==0){
           $("#list-order").html('')
+          let html = `
+          <div class="cartProduct-noitem">
+              <div>
+                  <div class="no_item-cart-product">
+                  <span>Không có đơn hàng nào!</span> 
+                  </div>
+              </div>
+          </div>`
+          $("#list-order").append(html)
+        }else{
           let html = `
           <div class="cartProduct-noitem">
               <div>
@@ -1002,7 +1033,7 @@ function getOrder() {
   }
   
 }
-function showLisrOrder(listOrders) {
+function showListOrder(listOrders) {
   
   listOrders.forEach((listOrder,i) => {
     let productCarts=listOrder.productCart;
