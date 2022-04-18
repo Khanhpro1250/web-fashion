@@ -247,7 +247,7 @@
     margin-top: var(--height-header);
     padding-top: 40%;
     background: url('../img/img-size-l/slide-img1.jpg') top / contain no-repeat;
-    animation: slider ease-in infinite 10s alternate;
+    animation: slider ease-in infinite 21s ;
 }
 
 @keyframes slider {
@@ -255,10 +255,13 @@
         background: url('../img/img-size-l/slide-img1.jpg') top / contain no-repeat;
     }
 
-    50% {
+    33.33333% {
         background: url('../img/img-size-l/slide-img2.jpg') top / contain no-repeat;
     }
 
+    66.666667% {
+        background: url('../img/img-size-l/slide-img3.jpg') top / contain no-repeat;
+    }
     100% {
         background: url('../img/img-size-l/slide-img1.jpg') top / contain no-repeat;
     }

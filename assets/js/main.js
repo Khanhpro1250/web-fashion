@@ -783,13 +783,13 @@ function showListCartProduct(cartProducts) {
 		<div class="cartProduct_item">
 			<div class="cartProduct_item-img">
 				<div class="product-img container__product-banner main-effect">
-					<a href="#"><img
+					<a href="detailProduct.html?id=${product.id}"><img
 							class="container__product-img "
 							src="${product.imgLink}"
 							alt=""></a>
 				</div>
 				<div class="product-name">
-					<a href="#">
+					<a href="detailProduct.html?id=${product.id}">
 						<h3>${product.productName}</h3>
 					</a>
 				</div>
@@ -1064,13 +1064,13 @@ function showListOrder(listOrders) {
           <div id="order_detais" class="order_detais">
             <div class="order_item-img">
                 <div class="order_item container__product-banner main-effect">
-                    <a id="img-item" href="#"><img
+                    <a id="img-item"  href="detailProduct.html?id=${product.id}"><img
                             class="container__product-img "
                             src="${product.imgLink}"
                             alt=""></a>
                 </div>
                 <div class="product-name">
-                    <a href="#">
+                    <a  href="detailProduct.html?id=${product.id}">
                         <h3 id="product-item-name">${product.productName}</h3>
                     </a>
                 </div>
