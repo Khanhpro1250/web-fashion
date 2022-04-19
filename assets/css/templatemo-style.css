@@ -78,7 +78,7 @@ button:focus {
   height: auto;
 }
 .tm-block-scroll {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .tm-block-overflow {
   overflow: hidden;
@@ -520,6 +520,11 @@ input[type="checkbox"]:focus {
   height: 100%;
   object-fit:contain;
 }
+.img-list-product{
+  width: 90px;
+  height: 100%;
+  object-fit:contain;
+}
 .tm-product-img-edit {
   max-width: 100%;
   position: relative;
@@ -714,4 +719,7 @@ input[type="checkbox"]:focus {
   #lineChart {
     max-height: 350px;
   }
+}
+.list-ad-order{
+  height:470px;
 }

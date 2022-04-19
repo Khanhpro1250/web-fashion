@@ -173,6 +173,9 @@ form:after {
   border: 1px solid #ed1c24;
   outline: none;
 }
+#old-password { background-position: 10px -53px !important }
+#new-password { background-position: 10px -53px !important }
+#new-2-password { background-position: 10px -53px !important }
 #username { background-position: 10px 10px !important }
 #address { background-position: 10px 10px !important }
 #name { background-position: 10px 10px !important }

@@ -11,6 +11,7 @@ window.onload = function () {
 
   if (account != null) {
     $("#name-login").html(account.name);
+    $("#name-admin-login").html(`${account.name} <i class="fas fa-angle-down"></i>`);
     $("#name-login1").html(account.name);
     $("#address-delivery").html(account.address);
     $("#phone-delivery").html(account.phone);
@@ -34,36 +35,37 @@ window.onload = function () {
     loadDetailProduct();
   }
   if (location.pathname.includes("login.html")) {
-    if(account!=null) {
-      if(account.typeUser==1||account.typeUser==0){
+    if (account != null) {
+      if (account.typeUser == 1 || account.typeUser == 0) {
         swal({
           title: "FAIL",
           text: "Bạn đã đăng nhập !",
           icon: "warning",
           dangerMode: true,
         }).then(() => {
-          history.back()
-        })
+          history.back();
+        });
       }
     }
   }
   if (location.pathname.includes("register")) {
-    if(account!=null) {
+    if (account != null) {
       swal({
         title: "FAIL",
         text: "Bạn đã đăng nhập !",
         icon: "warning",
         dangerMode: true,
       }).then(() => {
-        history.back()
-      })
+        history.back();
+      });
     }
   }
   //ADMIN
-  if (location.pathname.includes("products.html")) {
-    if(account!=null){
-      if(account.typeUser==1){
-        getAllProductsAdmin();
+
+  if (location.pathname.includes("admin.html")) {
+    if(account != null){
+      if (account.typeUser == 1) {
+        getAdminListOrder()
       }else{
         swal({
           title: "FAIL",
@@ -71,9 +73,8 @@ window.onload = function () {
           icon: "warning",
           dangerMode: true,
         }).then(() => {
-          history.back()
-        })
-       
+          history.back();
+        });
       }
     }else{
       swal({
@@ -82,64 +83,138 @@ window.onload = function () {
         icon: "warning",
         dangerMode: true,
       }).then(() => {
-        history.back()
-      })
+        history.back();
+      });
+    }
+  }
+  if (location.pathname.includes("products.html")) {
+    if (account != null) {
+      if (account.typeUser == 1) {
+        getAllProductsAdmin();
+      } else {
+        swal({
+          title: "FAIL",
+          text: "Bạn không có quyền truy cập !",
+          icon: "warning",
+          dangerMode: true,
+        }).then(() => {
+          history.back();
+        });
+      }
+    } else {
+      swal({
+        title: "FAIL",
+        text: "Bạn không có quyền truy cập !",
+        icon: "warning",
+        dangerMode: true,
+      }).then(() => {
+        history.back();
+      });
     }
   }
   if (location.pathname.includes("edit-product.html")) {
-    if(account!=null){
-      if(account.typeUser==1){
+    if (account != null) {
+      if (account.typeUser == 1) {
         let id = getIdDetails().id;
         showDetailEditProduct(id);
-      }else{
+      } else {
         swal({
           title: "FAIL",
           text: "Bạn không có quyền truy cập !",
           icon: "warning",
           dangerMode: true,
         }).then(() => {
-          history.back()
-        })
-       
+          history.back();
+        });
       }
-    }else{
+    } else {
       swal({
         title: "FAIL",
         text: "Bạn không có quyền truy cập !",
         icon: "warning",
         dangerMode: true,
       }).then(() => {
-        history.back()
-      })
+        history.back();
+      });
     }
-    
   }
   if (location.pathname.includes("cartProduct.html")) {
-    if(account==null){
+    if (account == null) {
       history.back();
-    }else{
+    } else {
       getCartProduct();
     }
   }
   if (location.pathname.includes("Order.html")) {
-    if(account!=null){
+    if (account != null) {
       getOrder();
-    }else{
+    } else {
       history.back();
     }
-    
   }
   $("#logout-icon").click(() => {
     localStorage.clear();
-    window.location.href="../account/login.html"
+    window.location.href = "../account/login.html";
   });
   $("#logout-admin").click(() => {
     localStorage.clear();
-    window.location.href="../account/login.html"
-  })
+    window.location.href = "../account/login.html";
+  });
 };
 
 //USER
+// change password page
+
+$("#change-pass_form").submit((e) => {
+  e.preventDefault();
+  let changepass = {
+    userId: localStorage.getItem('userId'),
+    oldPassword: $("#old-password").val(),
+    newPassword: $("#new-password").val(),
+    new2Password: $("#new-2-password").val(),
+  };
+  $.ajax({
+    type: "PUT",
+    url: "https://localhost:7244/account/changepass",
+    data: JSON.stringify(changepass),
+    dataType: "json",
+    contentType: "application/json",
+    success: function (res) {
+      if (res.code == 0) {
+        swal({
+          title: "SUCCESS",
+          text: res.message,
+          icon: "success",
+          buttons: true,
+          dangerMode: true,
+        }).then((rs) => {
+          if(rs){
+            localStorage.clear();
+            swal({
+              title: "SUCCESS",
+              text: "Vui lòng đăng nhập lại !",
+              icon: "success",
+              buttons: true,
+              dangerMode: true,
+            }).then((rs) => {
+              if(rs){
+                window.location.href="./login.html"
+              }
+            });
+  
+          }
+        });
+      } else {
+        swal({
+          title: "FAIL",
+          text: res.message,
+          icon: "warning",
+          dangerMode: true,
+        });
+      }
+    },
+  });
+});
 //Login page -------------------------------------------------------------------\
 
 $("#login_form").submit((e) => {
@@ -533,7 +608,7 @@ function showListProductAdmin(products) {
 			<td class="tm-product-name"><a href="edit-product.html?id=${product.id}">${
       product.productName
     }</a></td>
-			<td>1,450</td>
+			<td><img class="img-list-product" src="${product.imgLink}"></td>
 			<td>${product.amount}</td>
 			<td>${changTextPrice(product.price)}</td>
 			<td>
@@ -752,7 +827,6 @@ function getCartProduct() {
         $("#select-all_cart-product").html(`Tất cả ${res.count} sản phẩm`);
         $("#list_cartProduct-item").html("");
         showListCartProduct(res.listcartProduct);
-        caculatePrice(res.listcartProduct);
       } else if (res.count == 0) {
         let html = `
 				<div class="cartProduct-noitem">
@@ -843,6 +917,7 @@ function showListCartProduct(cartProducts) {
               $(`#sumary-price_${product.id}`).html(
                 sumaryPrice($(`#amount-${product.id}`).val(), product.price)
               );
+
               getCartProduct();
             }
           },
@@ -897,7 +972,91 @@ function showListCartProduct(cartProducts) {
       });
     });
   });
+  caculatePrice(cartProducts);
 }
+///payment click handler
+$("#btn_cartProduct-paid").click(() => {
+  let sumtmp = 0;
+  let discount = 0;
+  let summary = 0;
+  let productCarts;
+  $.ajax({
+    type: "GET",
+    url:
+      "https://localhost:7244/product/getcartproduct?UserId=" +
+      localStorage.getItem("userId"),
+    catch: false,
+    success: function (res) {
+      if (res.code == 0 && res.count > 0) {
+        productCarts = res.listcartProduct;
+        productCarts.forEach(function (Cart) {
+          sumtmp +=
+            Number.parseInt(Cart.amount) * Number.parseInt(Cart.product.price);
+          discount +=
+            Number.parseInt(Cart.amount) *
+            Number.parseInt(Cart.product.price) *
+            (Number.parseInt(Cart.product.discount) * 0.01);
+        });
+        summary = sumtmp - discount;
+        let order = {
+          productCart: productCarts,
+          totalPrice: summary,
+          CusName: localStorage.getItem("name_user"),
+        };
+        if ($("address-delivery").val() == "") {
+          swal({
+            title: "Fail",
+            text: "Chưa có địa chỉ giao hàng !",
+            icon: "error",
+            buttons: true,
+            dangerMode: true,
+          });
+        } else {
+          $.ajax({
+            type: "POST",
+            url: "https://localhost:7244/product/payment",
+            data: JSON.stringify(order),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (res) {
+              if (res.code == 0) {
+                swal({
+                  title: "SUCCESS",
+                  text: "Payment Successfully",
+                  icon: "success",
+                  buttons: true,
+                  dangerMode: true,
+                }).then(() => {
+                  $("#list_cartProduct-item").html("");
+                  $.ajax({
+                    type: "DELETE",
+                    url:
+                      "https://localhost:7244/product/deleteAll?id=" +
+                      localStorage.getItem("userId"),
+                    cache: false,
+                    success: function (res) {
+                      if (res.code == 0) {
+                        window.location.href = "./Order.html";
+                      }
+                    },
+                  });
+                });
+              } else {
+                swal({
+                  title: "FAIL",
+                  text: res.message,
+                  icon: "warning",
+                  dangerMode: true,
+                });
+              }
+            },
+          });
+        }
+      }
+    },
+  });
+});
+
 function changTextPrice(price) {
   var moneyFormatter = new Intl.NumberFormat();
   return moneyFormatter.format(price);
@@ -914,79 +1073,22 @@ function caculatePrice(productCarts) {
   let sumtmp = 0;
   let discount = 0;
   let summary = 0;
-  productCarts.forEach(function (productCart) {
+  productCarts.forEach(function (Cart) {
     sumtmp +=
-      Number.parseInt(productCart.amount) *
-      Number.parseInt(productCart.product.price);
+      Number.parseInt(Cart.amount) * Number.parseInt(Cart.product.price);
     discount +=
-      Number.parseInt(productCart.amount) *
-      Number.parseInt(productCart.product.price) *
-      (Number.parseInt(productCart.product.discount) * 0.01);
+      Number.parseInt(Cart.amount) *
+      Number.parseInt(Cart.product.price) *
+      (Number.parseInt(Cart.product.discount) * 0.01);
   });
   summary = sumtmp - discount;
   $("#price-tmp").html(changTextPrice(sumtmp));
   $("#discount-price").html("- " + changTextPrice(discount));
   $("#total-price").html(changTextPrice(summary));
-  $("#btn_cartProduct-paid").click(() => {
-    let order = {
-      productCart: productCarts,
-      totalPrice: summary,
-    };
-    if ($("address-delivery").val() == "") {
-      swal({
-        title: "Fail",
-        text: "Chưa có địa chỉ giao hàng !",
-        icon: "error",
-        buttons: true,
-        dangerMode: true,
-      });
-    } else {
-      $.ajax({
-        type: "POST",
-        url: "https://localhost:7244/product/payment",
-        data: JSON.stringify(order),
-        dataType: "json",
-        contentType: "application/json",
-        success: function (res) {
-          if (res.code == 0) {
-            swal({
-              title: "SUCCESS",
-              text: "Payment Successfully",
-              icon: "success",
-              buttons: true,
-              dangerMode: true,
-            }).then(() => {
-              $("#list_cartProduct-item").html('')
-              $.ajax({
-                type: "DELETE",
-                url:
-                  "https://localhost:7244/product/deleteAll?id=" +
-                  localStorage.getItem("userId"),
-                cache: false,
-                success: function (res) {
-                  if (res.code == 0) {
-                    
-                      window.location.href = "./Order.html"
-                  }
-                },
-              });
-            });
-          } else {
-            swal({
-              title: "FAIL",
-              text: res.message,
-              icon: "warning",
-              dangerMode: true,
-            });
-          }
-        },
-      });
-    }
-  });
 }
 function getOrder() {
-  let userId = localStorage.getItem("userId")
-  if(userId==null) {
+  let userId = localStorage.getItem("userId");
+  if (userId == null) {
     let html = `
       <div class="cartProduct-noitem">
           <div>
@@ -994,19 +1096,19 @@ function getOrder() {
               <span>Không có đơn hàng nào!</span> 
               </div>
           </div>
-      </div>`
-      $("#list-order").append(html)
-  }else{
+      </div>`;
+    $("#list-order").append(html);
+  } else {
     $.ajax({
       type: "GET",
       url: "https://localhost:7244/product/getorder?userId=" + userId,
       catch: false,
       success: function (res) {
-        if(res.code==0 && res.count>0){
-          $("#list-order").html('')
-          showListOrder(res.listOrder)
-        }else if(res.count==0){
-          $("#list-order").html('')
+        if (res.code == 0 && res.count > 0) {
+          $("#list-order").html("");
+          showListOrder(res.listOrder);
+        } else if (res.count == 0) {
+          $("#list-order").html("");
           let html = `
           <div class="cartProduct-noitem">
               <div>
@@ -1014,9 +1116,9 @@ function getOrder() {
                   <span>Không có đơn hàng nào!</span> 
                   </div>
               </div>
-          </div>`
-          $("#list-order").append(html)
-        }else{
+          </div>`;
+          $("#list-order").append(html);
+        } else {
           let html = `
           <div class="cartProduct-noitem">
               <div>
@@ -1024,19 +1126,16 @@ function getOrder() {
                   <span>Không có đơn hàng nào!</span> 
                   </div>
               </div>
-          </div>`
-          $("#list-order").append(html)
+          </div>`;
+          $("#list-order").append(html);
         }
-        
       },
     });
   }
-  
 }
 function showListOrder(listOrders) {
-  
-  listOrders.forEach((listOrder,i) => {
-    let productCarts=listOrder.productCart;
+  listOrders.forEach((listOrder, i) => {
+    let productCarts = listOrder.productCart;
     let html = `
       <div class="order_heading-container">
           <label>
@@ -1050,21 +1149,23 @@ function showListOrder(listOrders) {
           <div class="order_footer-container">
               <label>
               </label>
-              <span><strong>Tổng cộng: &ensp;</strong><span id="total_price-order-${i}">2.000.000</span></span>
+              <span><strong>Tổng cộng: &ensp;</strong><span id="total_price-order-${i}"></span></span>
           </div>
       </div>
-    `
-    $("#list-order").append(html)
-    let summaryPrice=0;
-    productCarts.forEach(productCart => {
-      summaryPrice+=listOrder.totalPrice;
-      let product=productCart.product;
-      let html1=`
+    `;
+    $("#list-order").append(html);
+    let summaryPrice = 0;
+    productCarts.forEach((productCart) => {
+      summaryPrice += listOrder.totalPrice;
+      let product = productCart.product;
+      let html1 = `
       
           <div id="order_detais" class="order_detais">
             <div class="order_item-img">
                 <div class="order_item container__product-banner main-effect">
-                    <a id="img-item"  href="detailProduct.html?id=${product.id}"><img
+                    <a id="img-item"  href="detailProduct.html?id=${
+                      product.id
+                    }"><img
                             class="container__product-img "
                             src="${product.imgLink}"
                             alt=""></a>
@@ -1076,17 +1177,81 @@ function showListOrder(listOrders) {
                 </div>
             </div>
             <div class="order-price">
-                <span><strong>Số lượng: &ensp;</strong><span id="amount-product-item">${productCart.amount}</span></span>
+                <span><strong>Số lượng: &ensp;</strong><span id="amount-product-item">${
+                  productCart.amount
+                }</span></span>
             </div>
             <div class="order-price">
-                <span class="price-product-item">${changTextPrice(listOrder.totalPrice)}₫</span>
+                <span class="price-product-item">${changTextPrice(
+                  listOrder.totalPrice
+                )}₫</span>
             </div>
           </div>
-      `
-      $(`#list-product-order-${i}`).prepend(html1)
-    })
+      `;
+      $(`#list-product-order-${i}`).prepend(html1);
+    });
 
-    
-    $(`#total_price-order-${i}`).html(changTextPrice(summaryPrice))
+    $(`#total_price-order-${i}`).html(changTextPrice(summaryPrice));
+  });
+}
+function getAdminListOrder(){
+  $.ajax({
+    type: "GET",
+    url: "https://localhost:7244/admin/product/getallOder",
+    catch: false,
+    success: function (res) {
+      console.log(res);
+        showAdminListOrder(res.listOrder)
+    },
+  });
+}
+function  showAdminListOrder(listOrders) {
+  listOrders.forEach((listOrder,i) => {
+    let html = `
+    <tr>
+        <th scope="row">#<b id="id_${i}">${listOrder.id}</b></th>
+        <td><b>${listOrder.cusName}</b></td>
+        <td><b>${changTextPrice(listOrder.totalPrice)}₫</b></td>
+        <td>1${listOrder.createdOn}</td>
+        <td>
+            <div class="tm-status-circle moving">
+            </div>Success
+        </td>
+        <td>
+            <i id="rm-order-${i}" class="far fa-trash-alt tm-product-delete-icon"></i>
+        </td>
+    </tr> 
+    `
+    $("#list-admin-order").append(html)
+    $(`#rm-order-${i}`).click(()=>{
+      swal({
+        title: "DELETE",
+        text:" Bạn có chắc muốn xóa đơn hàng này ?",
+        icon: "error",
+        
+        buttons: true,
+        dangerMode: true,
+      }).then(rs=>{
+        if(rs){
+          $.ajax({
+            type: "DELETE",
+            url: "https://localhost:7244/admin/product/deleteorder?key="+$(`#id_${i}`).html(),
+            catch: false,
+            success: function (res) {
+              if(res.code==0){
+                swal({
+                  title: "SUCCESS",
+                  text:" Xóa đơn hàng thành công",
+                  icon: "success",
+                  button: "Ok !",
+                }).then(()=>{
+                  location.reload();
+                })
+              }
+            },
+          });
+        }
+      })
+    })
   })
 }
