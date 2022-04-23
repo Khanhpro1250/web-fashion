@@ -1,3 +1,4 @@
+const api="https://localhost:7244/"
 window.onload = function () {
   let account = null;
   if (localStorage.getItem("name_user")) {
@@ -175,7 +176,7 @@ $("#change-pass_form").submit((e) => {
   };
   $.ajax({
     type: "PUT",
-    url: "https://localhost:7244/account/changepass",
+    url: `${api}account/changepass`,
     data: JSON.stringify(changepass),
     dataType: "json",
     contentType: "application/json",
@@ -225,7 +226,7 @@ $("#login_form").submit((e) => {
   };
   $.ajax({
     type: "POST",
-    url: "https://localhost:7244/account/login",
+    url: `${api}account/login`,
     data: JSON.stringify(user),
     dataType: "json",
     contentType: "application/json",
@@ -275,7 +276,7 @@ $("#register_form").submit((e) => {
   };
   $.ajax({
     type: "POST",
-    url: "https://localhost:7244/account/register",
+    url: `${api}account/register`,
     data: JSON.stringify(user_register),
     contentType: "application/json",
     success: function (res) {
@@ -306,20 +307,22 @@ $("#register_form").submit((e) => {
 function loadProduct(typeProduct) {
   $.ajax({
     type: "GET",
-    url: "https://localhost:7244/product/search/",
+    url: `${api}product/search/`,
     data: { key: typeProduct },
     cache: false,
     success: function (res) {
+      console.log(res);
       if (res.code == 0) {
-        ShowProduct(res.products, typeProduct);
+        ShowProduct(res.products);
       }
     },
   });
 }
 //show shoe product
-function ShowProduct(products, typeProduct) {
+function ShowProduct(products) {
   if (products) {
     products.forEach((product) => {
+      console.log(product.typeProduct);
       let html = `
 			<div class="col l-2-4 m-4 s-m-mt-16">
 				<div class="container__products">
@@ -350,11 +353,11 @@ function ShowProduct(products, typeProduct) {
 				</div>
 			</div>
 			`;
-      if (typeProduct == "shoes") {
+      if (product.typeProduct == "shoes") {
         $("#product_shoe").append(html);
-      } else if (typeProduct == "clothes") {
+      } else if (product.typeProduct == "clothes") {
         $("#product_clothes").append(html);
-      } else if (typeProduct == "jewels") {
+      } else if (product.typeProduct == "jewels") {
         $("#product_jewels").append(html);
       }
     });
@@ -389,7 +392,7 @@ function loadDetailProduct() {
   let id = getIdDetails().id;
   $.ajax({
     type: "GET",
-    url: "https://localhost:7244/product/search/",
+    url: `${api}product/search/`,
     data: { key: id },
     cache: false,
     success: function (res) {
@@ -500,7 +503,7 @@ function showDetailProduct(productDetails) {
         };
         $.ajax({
           type: "POST",
-          url: "https://localhost:7244/product/addCart/",
+          url: `${api}product/addCart/`,
           data: JSON.stringify(cartProduct),
           dataType: "json",
           contentType: "application/json",
@@ -541,7 +544,7 @@ function showDetailProduct(productDetails) {
 function getSameProduct(key) {
   $.ajax({
     type: "GET",
-    url: "https://localhost:7244/product/search/",
+    url: `${api}product/search/`,
     data: { key: key },
     cache: false,
     success: function (res) {
@@ -591,7 +594,7 @@ function showSameProduct(products) {
 function getAllProductsAdmin() {
   $.ajax({
     type: "GET",
-    url: "https://localhost:7244/product/getall",
+    url: `${api}product/getall`,
     cache: false,
     success: function (res) {
       if (res.code == 0) {
@@ -635,7 +638,7 @@ function deleteProductAdmin(productID) {
     if (result) {
       $.ajax({
         type: "DELETE",
-        url: "https://localhost:7244/admin/product/delete?key=" + key,
+        url: `${api}admin/product/delete?key=` + key,
         cache: false,
         contentType: "text/plain",
         success: function (res) {
@@ -659,7 +662,7 @@ function deleteProductAdmin(productID) {
 function showDetailEditProduct(productID) {
   $.ajax({
     type: "GET",
-    url: "https://localhost:7244/product/search?key=" + productID,
+    url: `${api}product/search?key=` + productID,
     cache: false,
     success: function (res) {
       $("#id").val(productID),
@@ -690,7 +693,7 @@ function getTypeAccount(val) {
   var type = val.value;
   $.ajax({
     type: "GET",
-    url: "https://localhost:7244/admin/account/search?key=" + type,
+    url: `${api}admin/account/search?key=` + type,
     cache: false,
     success: function (res) {
       showListAccountAdmin(res.users);
@@ -717,7 +720,7 @@ function showListAccountAdmin(accounts) {
 function showDetailAccount(id) {
   $.ajax({
     type: "GET",
-    url: "https://localhost:7244/admin/account/search?key=" + id.toString(),
+    url: `${api}admin/account/search?key=` + id.toString(),
     cache: false,
     success: function (res) {
       let account = res.users[0];
@@ -747,7 +750,7 @@ $("#deleteAccount").click((e) => {
     if (result) {
       $.ajax({
         type: "DELETE",
-        url: "https://localhost:7244/admin/account/delete?key=" + id.toString(),
+        url: `${api}admin/account/delete?key=` + id.toString(),
         cache: false,
         success: function (res) {
           if (res.code == 0) {
@@ -790,7 +793,7 @@ $("#update-account").submit((e) => {
   };
   $.ajax({
     type: "PUT",
-    url: "https://localhost:7244/admin/account/update?UserId=" + id,
+    url: `${api}admin/account/update?UserId=` + id,
     data: JSON.stringify(user_update),
     contentType: "application/json",
     success: function (res) {
@@ -820,7 +823,7 @@ function getCartProduct() {
   let user = localStorage.getItem("userId");
   $.ajax({
     type: "GET",
-    url: "https://localhost:7244/product/getcartproduct?UserId=" + user,
+    url: `${api}product/getcartproduct?UserId=` + user,
     catch: false,
     success: function (res) {
       if (res.code == 0 && res.count > 0) {
@@ -907,7 +910,7 @@ function showListCartProduct(cartProducts) {
         };
         $.ajax({
           type: "PUT",
-          url: "https://localhost:7244/product/updatecartproduct",
+          url: `${api}product/updatecartproduct`,
           data: JSON.stringify(cart_Product),
           dataType: "json",
           contentType: "application/json",
@@ -934,7 +937,7 @@ function showListCartProduct(cartProducts) {
       };
       $.ajax({
         type: "PUT",
-        url: "https://localhost:7244/product/updatecartproduct",
+        url: `${api}product/updatecartproduct`,
         data: JSON.stringify(cart_Product),
         dataType: "json",
         contentType: "application/json",
@@ -960,7 +963,7 @@ function showListCartProduct(cartProducts) {
         if (rs) {
           $.ajax({
             type: "DELETE",
-            url: "https://localhost:7244/product/delete?id=" + cartProduct.id,
+            url: `${api}product/delete?id=` + cartProduct.id,
             cache: false,
             success: function (res) {
               if (res.code == 0) {
@@ -983,7 +986,7 @@ $("#btn_cartProduct-paid").click(() => {
   $.ajax({
     type: "GET",
     url:
-      "https://localhost:7244/product/getcartproduct?UserId=" +
+      `${api}product/getcartproduct?UserId=` +
       localStorage.getItem("userId"),
     catch: false,
     success: function (res) {
@@ -1014,7 +1017,7 @@ $("#btn_cartProduct-paid").click(() => {
         } else {
           $.ajax({
             type: "POST",
-            url: "https://localhost:7244/product/payment",
+            url: `${api}product/payment`,
             data: JSON.stringify(order),
             dataType: "json",
             contentType: "application/json",
@@ -1031,7 +1034,7 @@ $("#btn_cartProduct-paid").click(() => {
                   $.ajax({
                     type: "DELETE",
                     url:
-                      "https://localhost:7244/product/deleteAll?id=" +
+                      `${api}product/deleteAll?id=` +
                       localStorage.getItem("userId"),
                     cache: false,
                     success: function (res) {
@@ -1101,7 +1104,7 @@ function getOrder() {
   } else {
     $.ajax({
       type: "GET",
-      url: "https://localhost:7244/product/getorder?userId=" + userId,
+      url: `${api}product/getorder?userId=` + userId,
       catch: false,
       success: function (res) {
         if (res.code == 0 && res.count > 0) {
@@ -1197,7 +1200,7 @@ function showListOrder(listOrders) {
 function getAdminListOrder(){
   $.ajax({
     type: "GET",
-    url: "https://localhost:7244/admin/product/getallOder",
+    url: `${api}admin/product/getallOder`,
     catch: false,
     success: function (res) {
       console.log(res);
@@ -1235,7 +1238,7 @@ function  showAdminListOrder(listOrders) {
         if(rs){
           $.ajax({
             type: "DELETE",
-            url: "https://localhost:7244/admin/product/deleteorder?key="+$(`#id_${i}`).html(),
+            url: `${api}admin/product/deleteorder?key=`+$(`#id_${i}`).html(),
             catch: false,
             success: function (res) {
               if(res.code==0){
@@ -1255,3 +1258,11 @@ function  showAdminListOrder(listOrders) {
     })
   })
 }
+$("#search_btn").click(()=>{
+  let search = $("#search_val").val();
+  $("#product_shoe").html("")
+  $("#product_clothes").html("")
+  $("#product_jewels").html("")
+  loadProduct(search)
+  $('.top-search__overlay').css('display', 'none')
+})
