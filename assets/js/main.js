@@ -241,7 +241,6 @@ $("#login_form").submit((e) => {
     contentType: "application/json",
     success: function (res) {
       if (res.code == 0) {
-        console.log(res)
         swal({
           title: "SUCCESS",
           text: "Login Successfully",
@@ -323,7 +322,6 @@ function loadProduct(typeProduct) {
     data: { key: typeProduct },
     cache: false,
     success: function (res) {
-      console.log(res);
       if (res.code == 0) {
         ShowProduct(res.products);
       }
@@ -334,7 +332,6 @@ function loadProduct(typeProduct) {
 function ShowProduct(products) {
   if (products) {
     products.forEach((product) => {
-      console.log(product.typeProduct);
       let html = `
 			<div class="col l-2-4 m-4 s-m-mt-16">
 				<div class="container__products">
@@ -1215,7 +1212,6 @@ function getAdminListOrder(){
     url: `${api}admin/product/getallOder`,
     catch: false,
     success: function (res) {
-      console.log(res);
         showAdminListOrder(res.listOrder)
     },
   });
