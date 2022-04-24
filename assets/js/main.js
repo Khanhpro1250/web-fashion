@@ -1300,12 +1300,19 @@ $("#btn-save-change-profile").click(()=>{
           title: "SUCCESS",
           text: res.message,
           icon: "success",
-          buttons: true,
+          button: "OK",
           dangerMode: true,
         }).then(() => {
-          
-          location.reload();
-          
+          swal({
+            title: "SUCCESS",
+            text:"Bạn cần phải đăng nhập lại!",
+            icon: "success",
+            button: "OK",
+            dangerMode: true,
+          }).then(() => {
+            localStorage.clear()
+            window.location.href="../account/login.html"
+          })
         });
       } else {
         swal({
