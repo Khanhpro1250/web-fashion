@@ -1,12 +1,13 @@
 const api="https://localhost:7244/"
+let account = null;
 window.onload = function () {
-  let account = null;
   if (localStorage.getItem("name_user")) {
     account = {
       name: localStorage.getItem("name_user"),
       phone: localStorage.getItem("phone_user"),
       typeUser: localStorage.getItem("type_user"),
       address: localStorage.getItem("address_user"),
+      email: localStorage.getItem("email_user")
     };
   }
 
@@ -17,6 +18,14 @@ window.onload = function () {
     $("#address-delivery").html(account.address);
     $("#phone-delivery").html(account.phone);
     $("#name-delivery").html(account.name);
+    $("#phone-number-profile").html(account.phone);
+    $("#email-profile").html(account.email);
+    $("#address-profile").html(account.address);
+
+    $("#name-edit-profile").val(account.name);
+    $("#phone-edit-profile").val(account.phone);
+    $("#address-edit-profile").val(account.address);
+    $("#email-edit-profile").val(account.email);
     $("#account_main").css("display", "block");
   } else {
     $("#account_main").css("display", "none");
@@ -232,6 +241,7 @@ $("#login_form").submit((e) => {
     contentType: "application/json",
     success: function (res) {
       if (res.code == 0) {
+        console.log(res)
         swal({
           title: "SUCCESS",
           text: "Login Successfully",
@@ -244,6 +254,8 @@ $("#login_form").submit((e) => {
           localStorage.setItem("phone_user", res.user.phoneNumber);
           localStorage.setItem("type_user", res.user.typeUser);
           localStorage.setItem("address_user", res.user.address);
+          localStorage.setItem("email_user", res.user.email);
+          localStorage.setItem("username", res.user.username);
           if (res.typeUser == "1") {
             window.location.href = "../admin/admin.html";
           } else if (res.typeUser == "0") {
@@ -1265,4 +1277,44 @@ $("#search_btn").click(()=>{
   $("#product_jewels").html("")
   loadProduct(search)
   $('.top-search__overlay').css('display', 'none')
+})
+
+$("#btn-save-change-profile").click(()=>{
+  let id = localStorage.getItem("userId")
+  let user_update = {
+    name: $("#name-edit-profile").val(),
+    phoneNumber: $("#phone-edit-profile").val(),
+    address: $("#address-edit-profile").val(),
+    username:localStorage.getItem("username"),
+    email: $("#email-edit-profile").val(),
+    typeUser: localStorage.getItem("type_user"),
+  };
+  $.ajax({
+    type: "PUT",
+    url: `${api}account/update?UserId=` + id,
+    data: JSON.stringify(user_update),
+    contentType: "application/json",
+    success: function (res) {
+      if (res.code == 0) {
+        swal({
+          title: "SUCCESS",
+          text: res.message,
+          icon: "success",
+          buttons: true,
+          dangerMode: true,
+        }).then(() => {
+          
+          location.reload();
+          
+        });
+      } else {
+        swal({
+          title: "FAIL",
+          text: res.message,
+          icon: "warning",
+          dangerMode: true,
+        });
+      }
+    },
+  });
 })
