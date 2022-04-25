@@ -447,7 +447,9 @@ input[type="checkbox"]:focus {
 .tm-product-delete-icon {
   font-size: 1.1rem;
   color: #fff;
+  cursor: pointer;
 }
+
 .tm-product-delete-link {
   padding: 10px;
   border-radius: 50%;

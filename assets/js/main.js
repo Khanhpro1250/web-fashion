@@ -294,7 +294,7 @@ $("#register_form").submit((e) => {
       if (res.code == 0) {
         swal({
           title: "SUCCESS",
-          text: "Login Successfully",
+          text: "Successfully",
           icon: "success",
           buttons: true,
           dangerMode: true,
@@ -639,7 +639,7 @@ function deleteProductAdmin(productID) {
   var key = productID.toString();
   swal({
     title: "DELETE",
-    text: "Login Successfully",
+    text: "Delete Successfully",
     icon: "error",
     buttons: true,
     dangerMode: true,
@@ -1147,11 +1147,12 @@ function getOrder() {
 }
 function showListOrder(listOrders) {
   listOrders.forEach((listOrder, i) => {
+    
     let productCarts = listOrder.productCart;
     let html = `
       <div class="order_heading-container">
           <label>
-              <span id="select-all_cart-product">Đặt hàng thành công</span>
+              <span id="order-status-${i}"></span>
           </label>
 
           <span></span>
@@ -1159,13 +1160,17 @@ function showListOrder(listOrders) {
       <div id="list-product-order-${i}" class="col l-12 order-list">
           
           <div class="order_footer-container">
-              <label>
-              </label>
+          <label>
+              <button id="btn-cus-conf-${i}" class="btn-confirm-delivery">Đã nhận hàng</button>
+          </label>
               <span><strong>Tổng cộng: &ensp;</strong><span id="total_price-order-${i}"></span></span>
           </div>
       </div>
     `;
     $("#list-order").append(html);
+    if(listOrder.cusConfirm==1){
+      $(`#btn-cus-conf-${i}`).css("display","none");
+    }
     let summaryPrice = 0;
     productCarts.forEach((productCart) => {
       summaryPrice += listOrder.totalPrice;
@@ -1186,6 +1191,10 @@ function showListOrder(listOrders) {
                     <a  href="detailProduct.html?id=${product.id}">
                         <h3 id="product-item-name">${product.productName}</h3>
                     </a>
+                    <div class="product-price ">
+                        <span id="product-price-item">${changTextPrice(product.price)}</span>
+                    </div>
+                    <div class="container__product--percent">${product.discount}%</div>
                 </div>
             </div>
             <div class="order-price">
@@ -1200,10 +1209,42 @@ function showListOrder(listOrders) {
             </div>
           </div>
       `;
+      
       $(`#list-product-order-${i}`).prepend(html1);
+      $(`#order-status-${i}`).html(listOrder.status);
     });
 
     $(`#total_price-order-${i}`).html(changTextPrice(summaryPrice));
+    $(`#btn-cus-conf-${i}`).click(()=>{
+      let updateorder ={
+        productCart:productCarts,
+        totalPrice:summaryPrice,
+        cusName:listOrder.cusName,
+        status:listOrder.status,
+        cusConfirm:1,
+        adminConfirm:listOrder.adminConfirm,
+      }
+      $.ajax({
+        type: "PUT",
+        url: `${api}product/updateOrder?id=${listOrder.id}`,
+        data:JSON.stringify(updateorder),
+        dataType: "json",
+        contentType: "application/json",
+        catch: false,
+        success: function (res) {
+           if(res.code==0){
+            swal({
+              title: "SUCCESS",
+              text:res.message,
+              icon: "success",
+              button: "Ok !",
+            }).then(()=>{
+              $(`#btn-cus-conf-${i}`).css("display","none");
+            })
+           }
+        },
+      });
+    })
   });
 }
 function getAdminListOrder(){
@@ -1220,8 +1261,8 @@ function  showAdminListOrder(listOrders) {
   listOrders.forEach((listOrder,i) => {
     let html = `
     <tr>
-        <th scope="row">#<b id="id_${i}">${listOrder.id}</b></th>
-        <td><b>${listOrder.cusName}</b></td>
+        <th scope="row"><a href="">#<b id="id_${i}">${listOrder.id}</b></a></th>
+        <td><a href=""><b>${listOrder.cusName}</b></a></td>
         <td><b>${changTextPrice(listOrder.totalPrice)}₫</b></td>
         <td>1${listOrder.createdOn}</td>
         <td>
