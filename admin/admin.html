@@ -1,134 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Manager</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" href="../assets/css/min/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/templatemo-style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Admin Manager</title>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+            />
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <link rel="stylesheet" href="../assets/css/min/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/templatemo-style.css">
+    </head>
 
-<body id="reportsPage">
-    <div class="" id="home">
-        <nav class="navbar navbar-expand-xl">
-            <div class="container h-100">
-                <a class="navbar-brand" href="admin.html">
-                    <h1 class="tm-site-title mb-0"> Admin Manager</h1>
-                </a>
-                <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <i class="fas fa-bars tm-nav-icon"></i>
-                </button>
+    <body id="reportsPage">
+        <div class="" id="home">
+            <nav class="navbar navbar-expand-xl">
+                <div class="container h-100">
+                    <a class="navbar-brand" href="admin.html">
+                        <h1 class="tm-site-title mb-0"> Admin Manager</h1>
+                    </a>
+                    <button class="navbar-toggler ml-auto mr-0" type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <i class="fas fa-bars tm-nav-icon"></i>
+                    </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto h-100">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class="fas fa-tachometer-alt"></i>
-                                Dashboard
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <!-- <li class="nav-item dropdown">
+                    <div class="collapse navbar-collapse"
+                        id="navbarSupportedContent">
+                        <ul class="navbar-nav mx-auto h-100">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    Dashboard
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
 
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-file-alt"></i>
-                                <span>
-                                    Reports <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Daily Report</a>
-                                <a class="dropdown-item" href="#">Weekly Report</a>
-                                <a class="dropdown-item" href="#">Yearly Report</a>
-                            </div>
-                        </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="products.html">
-                                <i class="fas fa-shopping-cart"></i>
-                                Products
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="products.html">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    Products
+                                </a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="accounts.html">
-                                <i class="far fa-user"></i>
-                                Accounts
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-cog"></i>
-                                <span  id="name-admin-login">
-                                    Settings <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="../account/changePassword.html">Change Password</a>
-                                <a id="logout-admin" class="dropdown-item" href="#">Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                    
+                            <li class="nav-item">
+                                <a class="nav-link" href="accounts.html">
+                                    <i class="far fa-user"></i>
+                                    Accounts
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#"
+                                    id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="fas fa-cog"></i>
+                                    <span id="name-admin-login">
+                                        Settings <i class="fas fa-angle-down"></i>
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu"
+                                    aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item"
+                                        href="../account/changePassword.html">Change
+                                        Password</a>
+                                    <a id="logout-admin" class="dropdown-item"
+                                        href="#">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
                 </div>
-            </div>
 
-        </nav>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <p class="text-white mt-5 mb-5">Welcome back, <b><strong id="name-login1">Huỳnh Công Khanh</strong></b></p>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <p class="text-white mt-5 mb-5">Welcome back, <b><strong
+                                    id="name-login1">Huỳnh Công Khanh</strong></b></p>
+                    </div>
                 </div>
-            </div>
-            <!-- row -->
-            <div class="row tm-content-row list-ad-order">
-                <div class="col-12 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-                        <h2 class="tm-block-title">Orders List</h2>
-                        <table  class="table ">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ORDER NO.</th>
-                                    <th scope="col">CUSTOMER</th>
-                                    <th scope="col">TOTAL PRICE</th>
-                                    <th scope="col">DATE</th>
-                                    <th scope="col">STATUS</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody id="list-admin-order">
-                                
+                <!-- row -->
+                <div class="row tm-content-row list-ad-order">
+                    <div class="col-12 tm-block-col">
+                        <div class="tm-bg-primary-dark tm-block tm-block-taller
+                            tm-block-scroll">
+                            <h2 class="tm-block-title">Orders List</h2>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ORDER NO.</th>
+                                        <th scope="col">CUSTOMER</th>
+                                        <th scope="col">TOTAL PRICE</th>
+                                        <th scope="col">DATE</th>
+                                        <th scope="col">STATUS</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="list-admin-order">
 
-                            </tbody>
-                        </table>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <footer class="tm-footer row tm-mt-small">
-            <div class="col-12 font-weight-light">
-                <p class="text-center text-white mb-0 px-4 small">
-                    Design by &copy; <a href="https://www.facebook.com/khanhshiperlover/"><strong>Khanh
-                            Huynh</strong></a>
-                </p>
+            <div class="modal" id="myModal" role="dialog">
+                <div class="modal-box">
+
+                    <!-- Modal content-->
+                    <div class="order-box">
+                        <div class="header-modal">
+                            <h4 class="modal-title">Đơn hàng: <strong id="modal-order-id"> #123443</strong></h4>
+                            <button type="button" class="close"
+                                data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="order-detail">
+                                <h4><strong id="modal-cus-name">Huỳnh Công Khanh</strong></h4>
+                                <div>
+                                    <strong>Giao tới:</strong> <span id="modal-cus-address" class="address-admin-order"></span>
+                                </div>
+                                <div>
+                                    <strong>Số lượng kiện hàng: </strong> <span id="modal-cus-amount"></span>
+                                </div>
+                                <div>
+                                    <strong>Tổng tiền :</strong> <span id="modal-cus-total-price"></span>
+                                </div>
+                                <div>
+                                    <strong>Tình trạng đơn</strong>
+                                    <select id="modal-status" class="status-order">
+                                        <option selected value="0">Đang chờ
+                                            duyệt</option>
+                                        <option value="1">Đang giao hàng</option>
+                                        <option value="2">Đã giao hàng</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-modal">
+                            <button id="modal-update-order" type="button" class="btn btn-default"
+                                data-dismiss="modal">Cập nhật đơn hàng</button>
+                            <button type="button" class="btn btn-danger"
+                                data-dismiss="modal">In hóa đơn</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </footer>
-    </div>
-    
-</body>
-<script src="../assets/js/min/jquery-3.3.1.min.js"></script>
-<script src="../assets/js/min/moment.min.js"></script>
-<script src="../assets/js/min/Chart.min.js"></script>
-<script src="../assets/js/min/bootstrap.min.js"></script>
-<script src="../assets/js/main.js"></script>
+            <footer class="tm-footer row tm-mt-small">
+                <div class="col-12 font-weight-light">
+                    <p class="text-center text-white mb-0 px-4 small">
+                        Design by &copy; <a
+                            href="https://www.facebook.com/khanhshiperlover/"><strong>Khanh
+                                Huynh</strong></a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+
+    </body>
+    <script src="../assets/js/min/jquery-3.3.1.min.js"></script>
+    <script src="../assets/js/min/moment.min.js"></script>
+    <script src="../assets/js/min/Chart.min.js"></script>
+    <script src="../assets/js/min/bootstrap.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 
 
 </html>

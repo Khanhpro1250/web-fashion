@@ -725,3 +725,49 @@ input[type="checkbox"]:focus {
 .list-ad-order{
   height:470px;
 }
+.order-box{
+  background-color:#63839d;
+  color:#e8e8e8;
+  padding:10px;
+  border-radius:5px;
+  
+  
+}
+.order-detail{
+  position:relative;
+  
+}
+.order-detail span, .order-detail .status-order{
+  position:absolute;
+  right:5px;
+}
+.status-order{
+  background:#567086;
+  border:none;
+  padding:4px 9px;
+  outline:none;
+  cursor:pointer;
+  border-radius:4px;
+}
+.status-order:hover{
+  background:#6c869c;
+}
+.header-modal{
+  display:flex;
+  justify-content:space-between;
+}
+.footer-modal{
+  display:flex;
+  justify-content: flex-end;
+}
+.modal-box{
+  width:770px;
+  position:absolute;
+  top:20%;
+  left:50%;
+  transform:translateX(-50%);
+}
+.address-admin-order{
+  word-wrap: break-word;
+  max-width: 470px;
+}

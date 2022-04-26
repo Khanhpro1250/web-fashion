@@ -242,6 +242,7 @@
 
 /* == Slider == */
 .slider {
+   
     position: relative;
     z-index: -1;
     margin-top: var(--height-header);

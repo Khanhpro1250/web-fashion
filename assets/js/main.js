@@ -630,6 +630,7 @@ function showListProductAdmin(products) {
 				<i class="far fa-trash-alt tm-product-delete-icon"></i>
 			</a>
 			</td>
+      
 		</tr>
 		`;
     $("#list-product").append(html);
@@ -1218,7 +1219,7 @@ function showListOrder(listOrders) {
     $(`#btn-cus-conf-${i}`).click(()=>{
       let updateorder ={
         productCart:productCarts,
-        totalPrice:summaryPrice,
+        totalPrice:listOrder.totalPrice,
         cusName:listOrder.cusName,
         status:listOrder.status,
         cusConfirm:1,
@@ -1235,7 +1236,7 @@ function showListOrder(listOrders) {
            if(res.code==0){
             swal({
               title: "SUCCESS",
-              text:res.message,
+              text:"Xác nhận đã nhận hàng thành công!",
               icon: "success",
               button: "Ok !",
             }).then(()=>{
@@ -1257,24 +1258,84 @@ function getAdminListOrder(){
     },
   });
 }
+
 function  showAdminListOrder(listOrders) {
   listOrders.forEach((listOrder,i) => {
+    console.log(listOrder)
     let html = `
     <tr>
-        <th scope="row"><a href="">#<b id="id_${i}">${listOrder.id}</b></a></th>
-        <td><a href=""><b>${listOrder.cusName}</b></a></td>
+        <th scope="row">#<b id="id_${i}">${listOrder.id}</b></th>
+        <td><b>${listOrder.cusName}</b></td>
         <td><b>${changTextPrice(listOrder.totalPrice)}₫</b></td>
         <td>1${listOrder.createdOn}</td>
         <td>
-            <div class="tm-status-circle moving">
-            </div>Success
+            <span id="status-item-list-${i}" class="tm-status-circle">
+            </span>
+            <p id="name-status-item-list-${i}" class="tm-status-circle">
+            </p>
+        </td>
+        <td>
+        <a id="open-modal" href="#"data-toggle="modal" data-target="#myModal"><i class="far fa-edit tm-product-delete-icon"></i></a>   
         </td>
         <td>
             <i id="rm-order-${i}" class="far fa-trash-alt tm-product-delete-icon"></i>
         </td>
     </tr> 
     `
+   
     $("#list-admin-order").append(html)
+    if(listOrder.adminConfirm==0){
+      $(`#status-item-list-${i}`).addClass('cancelled')
+      $(`#name-status-item-list-${i}`).html("pending")
+    }else if(listOrder.adminConfirm==1){
+      $(`#status-item-list-${i}`).addClass('pending')
+      $(`#name-status-item-list-${i}`).html("moving")
+    }else if(listOrder.adminConfirm==2&&listOrder.cusConfirm==1){
+      $(`#status-item-list-${i}`).addClass('moving')
+      $(`#name-status-item-list-${i}`).html("success")
+    }else{
+      $(`#status-item-list-${i}`).addClass('pending')
+      $(`#name-status-item-list-${i}`).html("watting")
+    }
+    $("#open-modal").click(() => {
+      $("#modal-order-id").html(`#${listOrder.id}`)
+      $("#modal-cus-name").html(listOrder.cusName)
+      $("#modal-cus-address").html(localStorage.getItem("address_user"))
+      $("#modal-cus-amount").html(listOrder.productCart.length)
+      $("#modal-cus-total-price").html(changTextPrice(listOrder.totalPrice)+'đ')
+      $("#modal-cus-total-price").attr("price-value",listOrder.totalPrice)
+      $(`select option[value=${listOrder.adminConfirm}]`).attr("selected",true);
+      $('#modal-update-order').click(()=>{
+          let updateorder ={
+            productCart:listOrder.productCart,
+            totalPrice:listOrder.totalPrice,
+            cusName:listOrder.cusName,
+            status:$('#modal-status :selected').text(),
+            cusConfirm:listOrder.cusConfirm,
+            adminConfirm:Number($('#modal-status').val()),
+          }
+          $.ajax({
+            type: "PUT",
+            url: `${api}product/updateOrder?id=${listOrder.id}`,
+            data:JSON.stringify(updateorder),
+            dataType: "json",
+            contentType: "application/json",
+            catch: false,
+            success: function (res) {
+              if(res.code==0){
+                swal({
+                  title: "SUCCESS",
+                  text:res.message,
+                  icon: "success",
+                  button: "Ok !",
+                }).then(()=>{
+                  location.reload();
+                })
+              }
+            },
+          });
+        })
+    })
     $(`#rm-order-${i}`).click(()=>{
       swal({
         title: "DELETE",
