@@ -199,6 +199,7 @@
 <script src='https://rawgit.com/cloudinary/cloudinary_js/master/js/jquery.cloudinary.js'></script>
 <script>
   // UPLOAD img cloudinary
+  const linkserver="https://localhost:7161/"
   const cloudName = 'khanh15032001';
   const unsignedUploadPreset = 'act5mvqc';
   let imgLink;
@@ -252,7 +253,7 @@
     }
     $.ajax({
       type: 'POST',
-      url: 'https://localhost:7244/admin/product/add',
+      url:  `${linkserver}admin/product/add`,
       data: JSON.stringify(product),
       cache: false,
       contentType: "application/json",

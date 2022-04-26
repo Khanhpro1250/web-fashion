@@ -1,4 +1,4 @@
-const api="https://localhost:7244/"
+const api="https://localhost:7161/"
 let account = null;
 window.onload = function () {
   if (localStorage.getItem("name_user")) {
