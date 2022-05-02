@@ -166,6 +166,12 @@ window.onload = function () {
     localStorage.clear();
     window.location.href = "../account/login.html";
   });
+  
+  $("#logout-icon-index").click(() => {
+    localStorage.clear();
+    window.location.href = "./account/login.html";
+  });
+
   $("#logout-admin").click(() => {
     localStorage.clear();
     window.location.href = "../account/login.html";
