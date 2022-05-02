@@ -1267,7 +1267,6 @@ function getAdminListOrder(){
 
 function  showAdminListOrder(listOrders) {
   listOrders.forEach((listOrder,i) => {
-    console.log(listOrder)
     let html = `
     <tr>
         <th scope="row">#<b id="id_${i}">${listOrder.id}</b></th>
@@ -1281,7 +1280,7 @@ function  showAdminListOrder(listOrders) {
             </p>
         </td>
         <td>
-        <a id="open-modal" href="#"data-toggle="modal" data-target="#myModal"><i class="far fa-edit tm-product-delete-icon"></i></a>   
+        <a id="open-modal-${i}" href="#"data-toggle="modal" data-target="#myModal"><i class="far fa-edit tm-product-delete-icon"></i></a>   
         </td>
         <td>
             <i id="rm-order-${i}" class="far fa-trash-alt tm-product-delete-icon"></i>
@@ -1303,7 +1302,8 @@ function  showAdminListOrder(listOrders) {
       $(`#status-item-list-${i}`).addClass('pending')
       $(`#name-status-item-list-${i}`).html("watting")
     }
-    $("#open-modal").click(() => {
+    $("#open-modal-"+i).click(() => {
+      console.log(listOrder.id)
       $("#modal-order-id").html(`#${listOrder.id}`)
       $("#modal-cus-name").html(listOrder.cusName)
       $("#modal-cus-address").html(localStorage.getItem("address_user"))
