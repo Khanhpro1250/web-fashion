@@ -254,7 +254,7 @@
     console.log(product)
     $.ajax({
       type: 'PUT',
-      url: `${linkserver}/admin/product/update?productId=` + getIdDetails().id,
+      url: `${linkserver}admin/product/update?productId=` + getIdDetails().id,
       data: JSON.stringify(product),
       cache: false,
       contentType: "application/json",
